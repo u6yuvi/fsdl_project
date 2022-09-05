@@ -1,0 +1,11 @@
+include *.txt
+include *.md
+#include *.pkl
+recursive-include ./semsearch_pkg/*
+
+include ./requirements.txt
+exclude *.log
+exclude *.cfg
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

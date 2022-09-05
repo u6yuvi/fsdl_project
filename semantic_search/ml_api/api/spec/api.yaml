@@ -1,0 +1,47 @@
+openapi: 3.0.0
+
+info:
+  title: Spec for SemSearch API
+  version: '1'
+
+servers:
+- url: http://{base}:5000/
+  description: API for performing semsearch predictions.
+  variables:
+    base:
+      default: 0.0.0.0
+
+paths:
+  /:
+    get:
+      operationId: api.controller.health
+      responses:
+        '200':
+          description: API Health Status
+
+  /v1/predictions:
+    post:
+      operationId: api.controller.predict
+      requestBody:
+        description: Text query to match an image
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              items:
+                $ref: '#/components/schemas/SearchDetails'
+      responses:
+        '200':
+          description: Semsearch Image Predictions
+        '400':
+          description: Bad request, semsearch data validation failed
+        '5XX':
+          description: Unexpected error
+
+components:
+  schemas:
+    SearchDetails:
+      type: object
+      description: "Text Query."
+      example: "sample_query"
