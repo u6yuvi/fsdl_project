@@ -13,19 +13,6 @@ make conda-update
 make pip-tools
 ```
 
-# Docker Setup[In-Progress]
-# Build Docker Container
-
-```
-sudo docker build -f docker/Dockerfile  -t fsdl .
-```
-
-## Mount semsearch_pkg as volume
-
-``` 
-sudo docker run -it -v $(pwd):/opt/app -p 8888:8888 fsdl bash
-```
-
 # Running Inference
 
 1. Refer Package-Access jupyter notebook for running inference.
@@ -63,4 +50,34 @@ sudo docker run -it -v $(pwd):/opt/app -p 8888:8888 fsdl bash
   "version": "0.1.0"
 }
 
+
+# Docker Setup[In-Progress]
+
+## Run the application manually 
+  1.  Build Docker Container
+
+```
+sudo docker build -f docker/Dockerfile  -t fsdl .
+```
+
+  2. Run docker container[bash]
+
+``` 
+sudo docker run -it -p 5000:5000 fsdl bash
+```
+  3. Run the flask app
+
+```
+python3 ml_api/run.py
+```
+  4. Goto http://localhost:5000/ui/
+
+## Run Using Docker Compose
+
+  1. Build and Run Docker
+```
+sudo docker-compose -f docker/docker-compose.yml up -d --build
+```
+
+  2. Goto http://localhost:5000/ui/
 
