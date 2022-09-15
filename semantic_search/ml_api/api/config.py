@@ -5,6 +5,7 @@ import sys
 
 import api
 
+APP_NAME = 'ml_api'
 
 # logging format
 FORMATTER = logging.Formatter(

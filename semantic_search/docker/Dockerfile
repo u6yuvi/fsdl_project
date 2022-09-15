@@ -4,6 +4,7 @@ RUN mkdir -p /opt/app
 #COPY ml_api/requirements.txt /opt/app/requirements.txt
 COPY ml_api /opt/app/ml_api
 COPY semsearch_pkg/semsearch /opt/app/semsearch
+COPY docker /opt/app/docker
 # COPY run.py /opt/app/run.py
 #COPY . /opt/app
 RUN pip install --upgrade pip

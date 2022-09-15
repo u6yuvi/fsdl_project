@@ -51,7 +51,8 @@ make pip-tools
 }
 
 
-# Docker Setup[In-Progress]
+# Docker Setup
+
 
 ## Run the application manually 
   1.  Build Docker Container
@@ -65,6 +66,11 @@ sudo docker build -f docker/Dockerfile  -t fsdl .
 ``` 
 sudo docker run -it -p 5000:5000 fsdl bash
 ```
+
+```
+sudo docker run -it -p 5000:5000 --name ml_api docker_ml_api bash
+```
+
   3. Run the flask app
 
 ```
@@ -74,10 +80,91 @@ python3 ml_api/run.py
 
 ## Run Using Docker Compose
 
-  1. Build and Run Docker
+#### Prerequisites 
+
+In the ```semantic_search/docker/config/prometheus/prometheus.yml``` go to line 34 ,under static configs-> targets , replace ```localhost``` with your local system IP ```<xx.x.x.xx:5000>```.
+
+
+
+  1. **Build and Run Docker Containers**
 ```
 sudo docker-compose -f docker/docker-compose.yml up -d --build
 ```
+2. Ensure all 4 docker images are created and running
 
-  2. Goto http://localhost:5000/ui/
+   ![](./images/image_container_running.png)
+
+  2. Run ```docker rm ml_api```
+
+  2. Start the ml_api docker using the command : ```sudo docker run -it -p 5000:5000 --name ml_api docker_ml_api bash```
+
+  2. Run ```make run-service-development```
+
+     2. Images corpus will be pulled 
+       2. Model will be exposed at ```/v1/predictions``` endpoint.
+       2. ```/metric``` endpoint will be exposed for Prometheus server to pull monitoring data.
+
+  2. Go to http://localhost:5000/ui/ and try sending the request by adding a  text query.
+
+![](./images/inference.png)
+
+7. Ensure you get the response back as shown above in the Response body section.
+
+<u>**Monitoring Metrics with Prometheus**</u>
+
+8. Go to http://localhost:3000/ and login Grafana with username ```admin``` and password ```foobar```
+9. In the home dashboard ,click on **Add Datasource** and select **Prometheus**.
+10. Under HTTP-> URL section add ```http://prometheus:9000``` and click **Save and Test**. Ensure you get a message saying "Data Source is working".
+
+11. **Monitor Model Metrics**
+
+    1. Go to Dashboards -> Browse -> New -> Import
+
+    2. Import dashboard **grafana_flask_basic_dashboard_ml_api.json**" present in our repository from  ```semantic_search/docker/config/grafana/```
+
+    3. Dashboard will be loaded which is configured to monitor two metrics : **Request Latency** ,**Latency**
+    4. Try sending some requests from  http://localhost:5000/ui/ , the data points will start appearing on the dashboard
+    5. ![](./images/grafana_import.png)
+
+![](./images/grafana_import_1.png)
+
+![](./images/grafana_flask_dashboard.png)
+
+12. **<u>Monitor Infrastructure Metrics</u>**
+
+2. Import dashboard **basic_cadvisor_dashboard_ml_api.json**" present in our repository from  ```semantic_search/docker/config/grafana/```
+
+​	![](./images/grafana_cadvisor.png)
+
+# Trouble Shooting
+
+1. ```
+ERROR: for ml_api  no such image: sha256:c3df073f09547286f8901569a25498cb09a11d94e8e2250c80074d916eee6b90: No such image: sha256:c3df073f09547286f8901569a25498cb09a11d94e8e2250c80074d916eee6b90
+ERROR: The image for the service you're trying to recreate has been removed. If you continue, volume data could be lost. Consider backing up your data before continuing.
+
+
+
+**Solution** :Remove stopped docker containers
+Go to semantic_search/docker and run: ```docker-compose rm```and remove any stopped docker container.
+
+
+
+# Docker Commands
+
+##List all docker containers
+```
+sudo docker container ls --all
+```
+or
+```
+sudo docker container -p
+```
+
+
+
+# References
+
+1. [prometheus_flask_exporter](https://github.com/rycus86/prometheus_flask_exporter)
+2. [use-grafana-to-monitor-flask-apps-with-prometheus](https://www.metricfire.com/blog/use-grafana-to-monitor-flask-apps-with-prometheus/)
+3. [flask_prometheus_metrics](https://github.com/pilosus/flask_prometheus_metrics)
 
