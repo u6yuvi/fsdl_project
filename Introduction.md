@@ -1,13 +1,20 @@
 # Local Development Setup
 
 1. Install miniconda
-2. Use environment.yml file for creating new environment in conda 
+2. Clone code and checkout branch
+```
+git clone https://github.com/arylwen/fsdl_project.git fsdl_project_docker
+cd fsdl_project_docker/ 
+git checkout docker_template_exp 
+```
+
+3. Use environment.yml file for creating new environment in conda 
 
 ```
 make conda-update
 ```
 
-3. Install additional python packages in the newly created conda environment using pip-tools
+4. Install additional python packages in the newly created conda environment using pip-tools
 
 ```
 make pip-tools
@@ -15,10 +22,21 @@ make pip-tools
 
 # Running Inference
 
-1. Refer Package-Access jupyter notebook for running inference.
+1. Install semsearch package
+```
+cd semantic_search
+python3 setup.py install
+```
+2. Understand inference
+```
+cd ..
+#in fsdl_project_docker
+jupyter notebook
+```
+Refer Package-Access jupyter notebook for running inference.
 
 # Running Flask Server
-1. Run ml_api/run.py to start the Flask Server.
+1. python3 semantic_search/ml_api/run.py to start the Flask Server.
 2. Goto http://localhost:5000/ui/.
 3. Goto POST /v1/predictions endpoint.
 4. Click on Try Now and enter text under the section "Text query to match an image"

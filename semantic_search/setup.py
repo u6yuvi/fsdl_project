@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 
 # Package meta-data.
 NAME = 'semsearch'
-DESCRIPTION = "Semantic Search using Rperesentation Learning."
+DESCRIPTION = "Semantic Search using Representation Learning."
 URL = "to-be-updated"
 EMAIL = "to-be-updated"
 AUTHOR = "to-be-updated"
@@ -29,12 +29,15 @@ long_description = DESCRIPTION
 
 # Load the package's VERSION file as a dictionary.
 about = {}
+#ROOT_DIR = Path(__file__).resolve().parent
 ROOT_DIR = Path(__file__).resolve().parent
+print("ROOT_DIR:"+str(ROOT_DIR))
 PACKAGE_DIR = ROOT_DIR / 'semsearch_pkg'
 with open(PACKAGE_DIR / "VERSION") as f:
     _version = f.read().strip()
     about["__version__"] = _version
-
+packages=find_packages(where=PACKAGE_DIR, exclude=("tests",))
+print("Packages:"+str(packages))
 
 # Where the magic happens:
 setup(
@@ -47,8 +50,11 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(exclude=("tests",)),
-    package_data={"semsearch": ["VERSION"]},
+    #packages=find_packages(exclude=("tests",)),
+    packages=find_packages(where=PACKAGE_DIR, exclude=("tests",)),
+    package_dir={"": "semsearch_pkg"},
+    package_data={"": ["VERSION"], 
+        "semsearch":["datasets/*.jpg"]},
     install_requires=list_reqs(),
     extras_require={},
     include_package_data=True,
