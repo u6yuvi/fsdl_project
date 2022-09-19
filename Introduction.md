@@ -126,12 +126,11 @@ sudo docker-compose -f docker/docker-compose.yml up -d --build
 9. In the home dashboard ,click on **Add Datasource** and select **Prometheus**.
 10. Under HTTP-> URL section add ```http://prometheus:9090``` and click **Save and Test**. Ensure you get a message saying "Data Source is working".
 
-11. **Monitor Model Metrics**
-
+11. **Monitor Endpoints Metrics**
     1. Go to Dashboards -> Browse -> New -> Import
-
+    
     2. Import dashboard **grafana_flask_basic_dashboard_ml_api.json**" present in our repository from  ```semantic_search/docker/config/grafana/```
-
+    
     3. Dashboard will be loaded which is configured to monitor two metrics : **Request Latency** ,**Latency**
     4. Try sending some requests from  http://localhost:5000/ui/ , the data points will start appearing on the dashboard
     5. ![](./images/grafana_import.png)
@@ -140,11 +139,19 @@ sudo docker-compose -f docker/docker-compose.yml up -d --build
 
 ![](./images/grafana_flask_dashboard.png)
 
-12. **<u>Monitor Infrastructure Metrics</u>**
 
-2. Import dashboard **basic_cadvisor_dashboard_ml_api.json**" present in our repository from  ```semantic_search/docker/config/grafana/```
+
+**<u>Monitor Infrastructure Metrics</u>**
+
+12. Import dashboard **basic_cadvisor_dashboard_ml_api.json**" present in the repository from  ```semantic_search/docker/config/grafana/```
 
 ​	![](./images/grafana_cadvisor.png)
+
+13. **Monitor ML Model Metrics**
+
+14. Import dashboard **ml_api_dashboard.json**" present in the repository from  ```semantic_search/docker/config/grafana/```
+
+    ![](/home/uv/Documents/backup/Documents/github/fsdl_project/images/grafana_ml_api_dashboard.png)
 
 # Trouble Shooting
 

@@ -1,4 +1,10 @@
-# FSDL 2022 Project
+# Semantic Similarity Search Engine with State of the Art Embeddings
+
+## FSDL-2022 PROJECT
+
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=white) ![Grafana](https://img.shields.io/badge/grafana-%23F46800.svg?style=for-the-badge&logo=grafana&logoColor=white) 
+
+
 
 ## Tasks
 1. Extracting Text/Image Embeddings using Pre-trained CLIP Model.
@@ -20,14 +26,16 @@ Refer ```Introduction.md``` page for environment setup and details about running
 ## Current Progress
 
 - [x] Integrated Clip Model from Sentence Trasnformer.
-
 - [x] Preseeding of Images in memory for Similarity Search.
-
 - [x] Use of Swagger and Flask REST API to do Text Search on a preseeded Image corpus.
 - [x] Docker Container to run the model inference.
 - [x] Use of Docker Compose to create and run multiple containers.
 - [x] Prometheus Integration for Monitoring Metrics.
 - [x] Grafana Dashboard for Visualising the Monitoring Metrics.
+  - [x] Monitor Endpoint Metrics
+  - [x] Monitor Infrastructure Metrics
+  - [x] Monitor Model Metrics
+
 
 ## TODO
 
@@ -37,3 +45,4 @@ Refer ```Introduction.md``` page for environment setup and details about running
 5. Adding REST API endpoint for Image to Image Search.
 6. Monitoring Logs with Kibana.
 7. Adding precommit for code sanity checks.
+8. Remove hard coded paameters in ml_api.
