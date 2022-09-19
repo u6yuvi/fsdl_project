@@ -151,7 +151,7 @@ sudo docker-compose -f docker/docker-compose.yml up -d --build
 
 14. Import dashboard **ml_api_dashboard.json**" present in the repository from  ```semantic_search/docker/config/grafana/```
 
-    ![](/home/uv/Documents/backup/Documents/github/fsdl_project/images/grafana_ml_api_dashboard.png)
+    ![](./images/grafana_ml_api_dashboard.png)
 
 # Trouble Shooting
 
