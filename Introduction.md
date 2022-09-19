@@ -36,7 +36,10 @@ jupyter notebook
 Refer Package-Access jupyter notebook for running inference.
 
 # Running Flask Server
-1. python3 semantic_search/ml_api/run.py to start the Flask Server.
+1. Run the server
+```
+python3 semantic_search/ml_api/run.py to start the Flask Server.
+```
 2. Goto http://localhost:5000/ui/.
 3. Goto POST /v1/predictions endpoint.
 4. Click on Try Now and enter text under the section "Text query to match an image"
@@ -98,12 +101,6 @@ python3 ml_api/run.py
 
 ## Run Using Docker Compose
 
-#### Prerequisites 
-
-In the ```semantic_search/docker/config/prometheus/prometheus.yml``` go to line 34 ,under static configs-> targets , replace ```localhost``` with your local system IP ```<xx.x.x.xx:5000>```.
-
-
-
   1. **Build and Run Docker Containers**
 ```
 sudo docker-compose -f docker/docker-compose.yml up -d --build
@@ -112,11 +109,6 @@ sudo docker-compose -f docker/docker-compose.yml up -d --build
 
    ![](./images/image_container_running.png)
 
-  2. Run ```docker rm ml_api```
-
-  2. Start the ml_api docker using the command : ```sudo docker run -it -p 5000:5000 --name ml_api docker_ml_api bash```
-
-  2. Run ```make run-service-development```
 
      2. Images corpus will be pulled 
        2. Model will be exposed at ```/v1/predictions``` endpoint.
@@ -132,7 +124,7 @@ sudo docker-compose -f docker/docker-compose.yml up -d --build
 
 8. Go to http://localhost:3000/ and login Grafana with username ```admin``` and password ```foobar```
 9. In the home dashboard ,click on **Add Datasource** and select **Prometheus**.
-10. Under HTTP-> URL section add ```http://prometheus:9000``` and click **Save and Test**. Ensure you get a message saying "Data Source is working".
+10. Under HTTP-> URL section add ```http://prometheus:9090``` and click **Save and Test**. Ensure you get a message saying "Data Source is working".
 
 11. **Monitor Model Metrics**
 

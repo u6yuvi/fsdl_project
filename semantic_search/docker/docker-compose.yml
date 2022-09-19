@@ -11,7 +11,7 @@ services:
       - 5000
     ports:
       - "5000:5000"   # expose webserver to localhost host:container
-    command: bash -c "run-service-development"
+    command: bash -c "make run-service-development"
 
   prometheus:
     image: prom/prometheus
