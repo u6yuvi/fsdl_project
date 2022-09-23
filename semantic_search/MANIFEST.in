@@ -1,7 +1,7 @@
 include *.txt
 include *.md
 #include *.pkl
-recursive-include ./semsearch_pkg/*
+recursive-include ./semsearch/ *
 
 include ./requirements.txt
 exclude *.log

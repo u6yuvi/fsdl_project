@@ -12,13 +12,15 @@ pip-tools:
 	pip install pip-tools==6.3.1 setuptools==59.5.0
 	pip-compile requirements/prod.in && pip-compile requirements/dev.in
 	pip-sync requirements/prod.txt requirements/dev.txt
+	python -m build semantic_search
+	pip install -e semantic_search
 
 # Compile and install the requirements for local linting (optional)
 pip-tools-lint:
 	pip install pip-tools==6.3.1 setuptools==59.5.0
 	pip-compile requirements/prod.in && pip-compile requirements/dev.in && pip-compile requirements/dev-lint.in
 	pip-sync requirements/prod.txt requirements/dev.txt requirements/dev-lint.txt
-
+	
 # Bump versions of transitive dependencies
 pip-tools-upgrade:
 	pip install pip-tools==6.3.1 setuptools==59.5.0
