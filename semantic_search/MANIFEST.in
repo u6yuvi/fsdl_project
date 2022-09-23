@@ -3,7 +3,7 @@ include *.md
 #include *.pkl
 recursive-include ./semsearch/ *
 
-include ./requirements.txt
+include ./requirements/prod.in
 exclude *.log
 exclude *.cfg
 

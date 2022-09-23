@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 from pathlib import Path
 
 from setuptools import find_packages, setup
-import os
 
 # Package meta-data.
-NAME = 'semsearch'
+NAME = "semsearch"
 DESCRIPTION = "Semantic Search using Rperesentation Learning."
 LONG_DESCRIPTION = DESCRIPTION
 URL = "to-be-updated"
@@ -17,7 +17,10 @@ REQUIRES_PYTHON = ">=3.6.0"
 VERSION = "0.1.0"
 
 # What packages are required for this module to be executed?
-def list_reqs(fname="requirements.txt"):
+reqirements = os.path.join("requirements", "prod.in")
+
+
+def list_reqs(fname=reqirements):
     with open(fname) as fd:
         return fd.read().splitlines()
 

@@ -7,41 +7,24 @@ conda-update:
 	conda env update --prune -f environment.yml
 	echo "!!!RUN THE conda activate COMMAND ABOVE RIGHT NOW!!!"
 
-# Compile and install exact pip packages
+# Install exact pip packages
+# flake8 has conflicts with importlib_metadata, so needs to be installed separately
 pip-tools:
 	pip install pip-tools==6.3.1 setuptools==59.5.0
-	pip-compile requirements/prod.in && pip-compile requirements/dev.in
-	pip-sync requirements/prod.txt requirements/dev.txt
+	pip-sync semantic_search/requirements/prod.txt semantic_search/requirements/dev.txt
+	pip install flake8
 	python -m build semantic_search
 	pip install -e semantic_search
-
-# Compile and install the requirements for local linting (optional)
-pip-tools-lint:
-	pip install pip-tools==6.3.1 setuptools==59.5.0
-	pip-compile requirements/prod.in && pip-compile requirements/dev.in && pip-compile requirements/dev-lint.in
-	pip-sync requirements/prod.txt requirements/dev.txt requirements/dev-lint.txt
 	
-# Bump versions of transitive dependencies
+# Bump versions of transitive dependencies, compile
 pip-tools-upgrade:
 	pip install pip-tools==6.3.1 setuptools==59.5.0
-	pip-compile --upgrade requirements/prod.in && pip-compile --upgrade requirements/dev.in && pip-compile --upgrade requirements/dev-lint.in
+	pip-compile --upgrade semantic_search/requirements/prod.in && pip-compile --upgrade semantic_search/requirements/dev.in
+	echo "!!!Run pip-tools command to actually update the environment"
+	echo "!!! make pip-tools !!!"
 
-# Example training command
-train-mnist-cnn-ddp:
-	python training/run_experiment.py --max_epochs=10 --gpus=-1 --accelerator=ddp --num_workers=20 --data_class=MNIST --model_class=CNN
-
-# Lint
+# Fix lint as much as possible, give messages on the rest
 lint:
-	tasks/lint.sh
-
-# Test notebooks in source repo
-test-notebooks:
-	tasks/notebook_test.sh $(SELECT_BY)
-
-# Test all lab notebooks from the folder for provided lab InDeX
-test-labs-up-to:
-	cd lab$(IDX) && ./.notebook_test.sh
-
-# Test only the notebooks for the provided lab InDeX
-test-lab:
-	cd lab$(IDX) && ./.notebook_test.sh $(IDX)
+	python -m black .
+	isort .
+	flake8 .
