@@ -1,9 +1,7 @@
 import logging
 
 import connexion
-
 from api.config import Config
-
 
 _logger = logging.getLogger(__name__)
 

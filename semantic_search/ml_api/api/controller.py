@@ -1,9 +1,11 @@
-from flask import request, jsonify, Response
 import sys
-sys.path.append("../semantic_search/semsearch_pkg/")
-from semsearch.predict import make_predictions
 
+from flask import Response, jsonify, request
+
+sys.path.append("../semantic_search/semsearch_pkg/")
 import json
+
+from semsearch.predict import make_predictions
 
 
 def health():
@@ -28,6 +30,4 @@ def predict():
         # version = result.get("version")
 
         # Step 5: Prepare prediction response
-        return jsonify(
-            {"predictions": result, "version": "0.1.0", "errors": []}
-        )
+        return jsonify({"predictions": result, "version": "0.1.0", "errors": []})

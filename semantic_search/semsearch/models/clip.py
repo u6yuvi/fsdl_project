@@ -1,11 +1,11 @@
-
-from sentence_transformers import SentenceTransformer
 import glob
+
 import numpy as np
 from PIL import Image
+from sentence_transformers import SentenceTransformer
 
-#img_model = SentenceTransformer('clip-ViT-B-32')
-#img_names = list(glob.glob('./data/photos/*.jpg'))
+# img_model = SentenceTransformer('clip-ViT-B-32')
+# img_names = list(glob.glob('./data/photos/*.jpg'))
 
 # def clip_embeddings(img_names = None):
 #     print("Images:", len(img_names))
@@ -16,9 +16,9 @@ from PIL import Image
 #     return img_emb, img_names
 
 
-def load_clip_model(model_name =None):
+def load_clip_model(model_name=None):
     if model_name is None:
-        model = SentenceTransformer('clip-ViT-B-32')
+        model = SentenceTransformer("clip-ViT-B-32")
     else:
         NotImplementedError
     return model

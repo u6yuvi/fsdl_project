@@ -1,7 +1,5 @@
-
 from api.app import create_app
 from api.config import DevelopmentConfig, setup_app_logging
-
 
 _config = DevelopmentConfig()
 
