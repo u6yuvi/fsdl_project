@@ -1,10 +1,8 @@
 import glob
-from pathlib import Path
 
 from semsearch.config import config
 from semsearch.encoding import clip_encoding
 from semsearch.models import load_clip_model
-from sentence_transformers import SentenceTransformer
 
 config.DATASET_DIR
 

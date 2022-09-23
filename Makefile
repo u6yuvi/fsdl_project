@@ -24,7 +24,8 @@ pip-tools-upgrade:
 	echo "!!! make pip-tools !!!"
 
 # Fix lint as much as possible, give messages on the rest
+# not running back as it makes too many changes, run it when needed
+# python -m black .
 lint:
-	python -m black .
 	isort .
 	flake8 .

@@ -1,7 +1,3 @@
-import glob
-
-import numpy as np
-from PIL import Image
 from sentence_transformers import SentenceTransformer
 
 # img_model = SentenceTransformer('clip-ViT-B-32')
@@ -11,7 +7,11 @@ from sentence_transformers import SentenceTransformer
 #     print("Images:", len(img_names))
 
 #     #non-multilingual CLIP Model
-#     img_emb = img_model.encode([Image.open(filepath) for filepath in img_names[:10]], batch_size=128, convert_to_tensor=True, show_progress_bar=True)
+#     img_emb = img_model.encode([
+#       Image.open(filepath)
+#       for filepath in img_names[:10]
+#       ],
+#       batch_size=128, convert_to_tensor=True, show_progress_bar=True)
 #     img_emb = img_emb /  np.linalg.norm(img_emb, axis=1, keepdims=True)
 #     return img_emb, img_names
 
