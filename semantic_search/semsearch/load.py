@@ -2,7 +2,7 @@ import glob
 
 from semsearch.config import config
 from semsearch.encoding import clip_encoding
-from semsearch.models import load_clip_model
+from semsearch.models.clip import load_clip_model
 
 config.DATASET_DIR
 

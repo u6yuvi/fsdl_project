@@ -2,7 +2,7 @@
 import numpy as np
 from PIL import Image
 
-from ..models import load_clip_model
+from semsearch.models.clip import load_clip_model
 
 # model = SentenceTransformer('clip-ViT-B-32')
 model = load_clip_model()
