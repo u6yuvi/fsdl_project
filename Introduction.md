@@ -7,7 +7,9 @@
 make conda-update
 ```
 
-3. Install additional python packages in the newly created conda environment using pip-tools
+3. Install additional python packages in the newly created conda environment using pip-tools. 
+There maybe an error about dependency resolution on importlib-metadata, but that is OK, as it
+is a problem not fixed in flake8.
 
 ```
 make pip-tools
@@ -28,7 +30,7 @@ sudo docker run -it -v $(pwd):/opt/app -p 8888:8888 fsdl bash
 
 # Running Inference
 
-1. Refer Package-Access jupyter notebook for running inference.
+1. Refer Package-Access jupyter notebook for running inference. Make sure that the jupyter notebook is set to run from the project workdir, ie `fsdl_project`
 
 # Running Flask Server
 1. Run ml_api/run.py to start the Flask Server.

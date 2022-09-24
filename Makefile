@@ -12,9 +12,9 @@ conda-update:
 pip-tools:
 	pip install pip-tools==6.3.1 setuptools==59.5.0
 	pip-sync semantic_search/requirements/prod.txt semantic_search/requirements/dev.txt
-	pip install flake8
 	python -m build semantic_search
 	pip install -e semantic_search
+	pip install flake8
 	
 # Bump versions of transitive dependencies, compile
 pip-tools-upgrade:

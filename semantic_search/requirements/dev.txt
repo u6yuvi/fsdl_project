@@ -18,8 +18,6 @@ argon2-cffi==21.3.0
     # via notebook
 argon2-cffi-bindings==21.2.0
     # via argon2-cffi
-astroid==2.12.10
-    # via pylint
 async-timeout==4.0.2
     # via
     #   -c semantic_search/requirements/prod.txt
@@ -88,8 +86,6 @@ defusedxml==0.7.1
     # via
     #   -r semantic_search/requirements/dev.in
     #   nbconvert
-dill==0.3.5.1
-    # via pylint
 distlib==0.3.6
     # via virtualenv
 docker-pycreds==0.4.0
@@ -160,7 +156,9 @@ importlib-metadata==4.12.0
     #   transformers
     #   virtualenv
 importlib-resources==5.9.0
-    # via jsonschema
+    # via
+    #   -c semantic_search/requirements/prod.txt
+    #   jsonschema
 iniconfig==1.1.1
     # via pytest
 ipykernel==6.15.3
@@ -176,7 +174,7 @@ ipython-genutils==0.2.0
 ipywidgets==8.0.2
     # via -r semantic_search/requirements/dev.in
 isort==5.10.1
-    # via pylint
+    # via -r semantic_search/requirements/dev.in
 itermplot==0.331
     # via -r semantic_search/requirements/dev.in
 jedi==0.18.1
@@ -191,7 +189,9 @@ joblib==1.2.0
     #   nltk
     #   scikit-learn
 jsonschema==4.16.0
-    # via nbformat
+    # via
+    #   -c semantic_search/requirements/prod.txt
+    #   nbformat
 jupyter-client==7.3.5
     # via
     #   ipykernel
@@ -211,8 +211,6 @@ kiwisolver==1.4.4
     # via
     #   -c semantic_search/requirements/prod.txt
     #   matplotlib
-lazy-object-proxy==1.7.1
-    # via astroid
 lxml==4.9.1
     # via nbconvert
 markdown==3.4.1
@@ -232,8 +230,6 @@ matplotlib-inline==0.1.6
     # via
     #   ipykernel
     #   ipython
-mccabe==0.7.0
-    # via pylint
 mistune==2.0.4
     # via nbconvert
 mmh3==3.0.0
@@ -320,11 +316,12 @@ pillow==7.1.2
     #   matplotlib
     #   torchvision
 pkgutil-resolve-name==1.3.10
-    # via jsonschema
+    # via
+    #   -c semantic_search/requirements/prod.txt
+    #   jsonschema
 platformdirs==2.5.2
     # via
     #   black
-    #   pylint
     #   virtualenv
 pluggy==1.0.0
     # via pytest
@@ -369,8 +366,6 @@ pygments==2.13.0
     # via
     #   ipython
     #   nbconvert
-pylint==2.15.3
-    # via -r semantic_search/requirements/dev.in
 pymilvus==2.1.2
     # via -r semantic_search/requirements/dev.in
 pyparsing==3.0.9
@@ -379,7 +374,9 @@ pyparsing==3.0.9
     #   matplotlib
     #   packaging
 pyrsistent==0.18.1
-    # via jsonschema
+    # via
+    #   -c semantic_search/requirements/prod.txt
+    #   jsonschema
 pytest==7.1.1
     # via
     #   -r semantic_search/requirements/dev.in
@@ -489,10 +486,7 @@ tomli==2.0.1
     #   build
     #   coverage
     #   pep517
-    #   pylint
     #   pytest
-tomlkit==0.11.4
-    # via pylint
 torch==1.12.1
     # via
     #   pytorch-lightning
@@ -534,15 +528,12 @@ traitlets==5.4.0
 transformers==4.22.1
     # via sentence-transformers
 typed-ast==1.5.4
-    # via
-    #   astroid
-    #   black
+    # via black
 typing-extensions==4.3.0
     # via
     #   -c semantic_search/requirements/prod.txt
     #   aiohttp
     #   argon2-cffi
-    #   astroid
     #   async-timeout
     #   black
     #   gitpython
@@ -550,7 +541,6 @@ typing-extensions==4.3.0
     #   importlib-metadata
     #   jsonschema
     #   kiwisolver
-    #   pylint
     #   pytorch-lightning
     #   torch
     #   torchvision
@@ -573,13 +563,13 @@ webencodings==0.5.1
     #   bleach
     #   tinycss2
 werkzeug==2.2.2
-    # via tensorboard
+    # via
+    #   -c semantic_search/requirements/prod.txt
+    #   tensorboard
 wheel==0.37.1
     # via tensorboard
 widgetsnbextension==4.0.3
     # via ipywidgets
-wrapt==1.14.1
-    # via astroid
 yarl==1.8.1
     # via
     #   -c semantic_search/requirements/prod.txt
