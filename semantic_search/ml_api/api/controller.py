@@ -1,35 +1,35 @@
-from flask import request, jsonify, Response
 import numpy as np
-import sys
-#sys.path.append("../semantic_search/semsearch_pkg/")
-from semsearch.predict import make_predictions
-from prometheus_client import Histogram, Gauge,Info
-import json
+from flask import jsonify, request
 from ml_api.api.config import APP_NAME
-
+from prometheus_client import Gauge, Histogram, Info
+# sys.path.append("../semantic_search/semsearch_pkg/")
+from semsearch.predict import make_predictions
 
 PREDICTION_TRACKER = Histogram(
-    name='similarity_prediction',
-    documentation='ML Model Prediction on House Price',
-    labelnames=['app_name', 'model_name', 'model_version']
+    name="similarity_prediction",
+    documentation="ML Model Prediction on House Price",
+    labelnames=["app_name", "model_name", "model_version"],
 )
 
 PREDICTION_GAUGE = Gauge(
-    name='similarity_gauge',
-    documentation='ML Model Prediction on House Price for min max calcs',
-    labelnames=['app_name', 'model_name', 'model_version']
+    name="similarity_gauge",
+    documentation="ML Model Prediction on House Price for min max calcs",
+    labelnames=["app_name", "model_name", "model_version"],
 )
 
 MODEL_VERSIONS = Info(
-    'model_version_details',
-    'Capture model version information',
+    "model_version_details",
+    "Capture model version information",
 )
 
-MODEL_VERSIONS.info({
-    'live_model': "Clip",
-    'live_version': "0.1.0",
-    'shadow_model': "Clip_Shadow",
-    'shadow_version': "0.1.1"})
+MODEL_VERSIONS.info(
+    {
+        "live_model": "Clip",
+        "live_version": "0.1.0",
+        "shadow_model": "Clip_Shadow",
+        "shadow_version": "0.1.1",
+    }
+)
 
 
 def health():
@@ -54,23 +54,19 @@ def predict():
         # version = result.get("version")
 
         # Step 4: Monitoring
-        #for _prediction in result:
+        # for _prediction in result:
         if result:
             scores = [i["score"] for i in result]
             mean_score = np.mean(scores)
         else:
             mean_score = 0
         PREDICTION_TRACKER.labels(
-            app_name=APP_NAME,
-            model_name="Clip",
-            model_version="0.1.0").observe(mean_score)
+            app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
+        ).observe(mean_score)
         PREDICTION_GAUGE.labels(
-            app_name=APP_NAME,
-            model_name="Clip",
-            model_version="0.1.0").set(mean_score)
-
+            app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
+        ).set(mean_score)
 
         # Step 5: Prepare prediction response
         return jsonify(
-            {"predictions": result, "version": "0.1.0", "errors": []}
-        )
+            {"predictions": result, "version": "0.1.0", "errors": []})

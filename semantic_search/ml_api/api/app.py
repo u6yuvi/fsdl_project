@@ -1,10 +1,8 @@
 import logging
 
 import connexion
-
 from ml_api.api.config import Config
 from ml_api.api.monitoring.middleware import setup_metrics
-
 
 _logger = logging.getLogger(__name__)
 

@@ -6,4 +6,7 @@ pytest-cov==3.0.0
 # versioned to match Google Colab
 #tornado>=5.1,<5.2
 # versioned to improve stability
- ipykernel
+ipykernel
+isort
+isort
+flake8>=3.7.9,<4.0

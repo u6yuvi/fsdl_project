@@ -108,6 +108,8 @@ filelock==3.8.0
     # via
     #   huggingface-hub
     #   transformers
+flake8==3.9.2
+    # via -r semantic_search/requirements/dev.in
 flask==2.2.2
     # via connexion
 fonttools==4.37.1
@@ -160,6 +162,7 @@ importlib-metadata==4.12.0
     #   build
     #   click
     #   connexion
+    #   flake8
     #   flask
     #   huggingface-hub
     #   jsonschema
@@ -179,6 +182,8 @@ ipython==7.34.0
     # via ipykernel
 isodate==0.6.1
     # via gantry
+isort==5.10.1
+    # via -r semantic_search/requirements/dev.in
 itsdangerous==2.1.2
     # via
     #   connexion
@@ -230,6 +235,8 @@ matplotlib-inline==0.1.6
     # via
     #   ipykernel
     #   ipython
+mccabe==0.6.1
+    # via flake8
 mdit-py-plugins==0.3.0
     # via markdown-it-py
 mdurl==0.1.2
@@ -320,6 +327,8 @@ ptyprocess==0.7.0
     # via pexpect
 py==1.11.0
     # via pytest
+pycodestyle==2.7.0
+    # via flake8
 pycparser==2.21
     # via cffi
 pycryptodome==3.15.0
@@ -330,6 +339,8 @@ pydantic==1.9.2
     #   gradio
 pydub==0.25.1
     # via gradio
+pyflakes==2.3.1
+    # via flake8
 pygments==2.13.0
     # via ipython
 pymilvus==2.1.2
