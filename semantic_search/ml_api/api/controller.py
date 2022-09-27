@@ -5,7 +5,7 @@ import sys
 from semsearch.predict import make_predictions
 from prometheus_client import Histogram, Gauge,Info
 import json
-from api.config import APP_NAME
+from ml_api.api.config import APP_NAME
 
 
 PREDICTION_TRACKER = Histogram(

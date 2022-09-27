@@ -20,3 +20,4 @@ connexion[swagger-ui]
 wandb==0.12.17
 sentence-transformers
 pymilvus
+prometheus_client

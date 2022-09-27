@@ -5,91 +5,66 @@
 #    pip-compile --output-file=semantic_search/fsdl_project.txt semantic_search/requirements/dev.in semantic_search/requirements/prod.in
 #
 aiohttp==3.8.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 aiosignal==1.2.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   aiohttp
+    # via aiohttp
 analytics-python==1.4.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 anyio==3.6.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   httpcore
     #   starlette
 async-timeout==4.0.2
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   aiohttp
+    # via aiohttp
 asynctest==0.13.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   aiohttp
+    # via aiohttp
 attrs==22.1.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   aiohttp
     #   jsonschema
     #   pytest
+backcall==0.2.0
+    # via ipython
 backoff==1.10.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   analytics-python
+    # via analytics-python
 backports.zoneinfo==0.2.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   pytz-deprecation-shim
     #   tzlocal
 bcrypt==4.0.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   paramiko
+    # via paramiko
 boto3==1.24.61
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   boto3-extensions
     #   gantry
     #   smart-open
 boto3-extensions==0.19.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 botocore==1.27.61
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   boto3
     #   boto3-extensions
     #   s3transfer
 build==0.8.0
     # via -r semantic_search/requirements/dev.in
 cachetools==4.2.4
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 certifi==2022.6.15
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   httpcore
     #   httpx
     #   requests
     #   sentry-sdk
 cffi==1.15.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   cryptography
     #   pynacl
 charset-normalizer==2.1.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   aiohttp
     #   requests
 click==8.1.3
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   clickclick
     #   flask
     #   gantry
@@ -97,14 +72,11 @@ click==8.1.3
     #   uvicorn
     #   wandb
 click-spinner==0.1.10
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 clickclick==20.10.2
     # via connexion
 colorama==0.4.5
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   gantry
     #   halo
     #   log-symbols
@@ -115,27 +87,23 @@ coverage[toml]==6.4
     #   -r semantic_search/requirements/dev.in
     #   pytest-cov
 cryptography==37.0.4
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   paramiko
+    # via paramiko
 cycler==0.11.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   matplotlib
+    # via matplotlib
 dateparser==1.1.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
+debugpy==1.6.3
+    # via ipykernel
+decorator==5.1.1
+    # via ipython
 docker-pycreds==0.4.0
     # via wandb
+entrypoints==0.4
+    # via jupyter-client
 fastapi==0.81.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 ffmpy==0.3.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 filelock==3.8.0
     # via
     #   huggingface-hub
@@ -143,30 +111,21 @@ filelock==3.8.0
 flask==2.2.2
     # via connexion
 fonttools==4.37.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   matplotlib
+    # via matplotlib
 frozenlist==1.3.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   aiohttp
     #   aiosignal
 fsspec==2022.7.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 gantry==0.4.5
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   -r semantic_search/requirements/prod.in
+    # via -r semantic_search/requirements/prod.in
 gitdb==4.0.9
     # via gitpython
 gitpython==3.1.27
     # via wandb
 gradio==3.0.21
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   -r semantic_search/requirements/prod.in
+    # via -r semantic_search/requirements/prod.in
 grpcio==1.47.2
     # via
     #   grpcio-tools
@@ -175,39 +134,28 @@ grpcio-tools==1.47.2
     # via pymilvus
 h11==0.12.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   httpcore
     #   uvicorn
 h5py==3.7.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   -r semantic_search/requirements/prod.in
+    # via -r semantic_search/requirements/prod.in
 halo==0.0.31
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 httpcore==0.15.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   httpx
+    # via httpx
 httpx==0.23.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 huggingface-hub==0.9.1
     # via
     #   sentence-transformers
     #   transformers
 idna==3.3
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   anyio
     #   requests
     #   rfc3986
     #   yarl
 importlib-metadata==4.12.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   -r semantic_search/requirements/prod.in
     #   build
     #   click
@@ -225,23 +173,25 @@ inflection==0.5.1
     # via connexion
 iniconfig==1.1.1
     # via pytest
+ipykernel==6.16.0
+    # via -r semantic_search/requirements/dev.in
+ipython==7.34.0
+    # via ipykernel
 isodate==0.6.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 itsdangerous==2.1.2
     # via
     #   connexion
     #   flask
+jedi==0.18.1
+    # via ipython
 jinja2==3.1.2
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   flask
     #   gradio
     #   swagger-ui-bundle
 jmespath==1.0.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   boto3
     #   botocore
 joblib==1.2.0
@@ -250,66 +200,58 @@ joblib==1.2.0
     #   scikit-learn
 jsonschema==4.16.0
     # via connexion
+jupyter-client==7.3.5
+    # via ipykernel
+jupyter-core==4.11.1
+    # via jupyter-client
 kiwisolver==1.4.4
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   matplotlib
+    # via matplotlib
 linkify-it-py==1.0.3
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   markdown-it-py
+    # via markdown-it-py
 log-symbols==0.0.14
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   halo
+    # via halo
 markdown-it-py[linkify,plugins]==2.1.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   gradio
     #   mdit-py-plugins
 markupsafe==2.1.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   jinja2
     #   werkzeug
 marshmallow==3.17.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   gantry
     #   marshmallow-oneofschema
 marshmallow-oneofschema==3.0.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 matplotlib==3.5.3
+    # via gradio
+matplotlib-inline==0.1.6
     # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    #   ipykernel
+    #   ipython
 mdit-py-plugins==0.3.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   markdown-it-py
+    # via markdown-it-py
 mdurl==0.1.2
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   markdown-it-py
+    # via markdown-it-py
 mmh3==3.0.0
     # via pymilvus
 monotonic==1.6
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   analytics-python
     #   gantry
 multidict==6.0.2
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   aiohttp
     #   yarl
+nest-asyncio==1.5.5
+    # via
+    #   ipykernel
+    #   jupyter-client
 nltk==3.7
     # via sentence-transformers
 numpy==1.21.6
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   -r semantic_search/requirements/prod.in
     #   gantry
     #   gradio
@@ -322,36 +264,36 @@ numpy==1.21.6
     #   torchvision
     #   transformers
 orjson==3.8.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 packaging==21.3
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   build
     #   connexion
     #   huggingface-hub
+    #   ipykernel
     #   marshmallow
     #   matplotlib
     #   pytest
     #   transformers
 pandas==1.3.5
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   gantry
     #   gradio
     #   pymilvus
 paramiko==2.11.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
+parso==0.8.3
+    # via jedi
 pathtools==0.1.2
     # via wandb
 pep517==0.13.0
     # via build
+pexpect==4.8.0
+    # via ipython
+pickleshare==0.7.5
+    # via ipython
 pillow==7.1.2
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   -r semantic_search/requirements/prod.in
     #   gradio
     #   matplotlib
@@ -360,42 +302,42 @@ pkgutil-resolve-name==1.3.10
     # via jsonschema
 pluggy==1.0.0
     # via pytest
+prometheus-client==0.14.1
+    # via -r semantic_search/requirements/prod.in
 promise==2.3
     # via wandb
+prompt-toolkit==3.0.31
+    # via ipython
 protobuf==3.19.5
     # via
     #   grpcio-tools
     #   wandb
 psutil==5.9.2
-    # via wandb
+    # via
+    #   ipykernel
+    #   wandb
+ptyprocess==0.7.0
+    # via pexpect
 py==1.11.0
     # via pytest
 pycparser==2.21
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   cffi
+    # via cffi
 pycryptodome==3.15.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 pydantic==1.9.2
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   fastapi
     #   gradio
 pydub==0.25.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
+pygments==2.13.0
+    # via ipython
 pymilvus==2.1.2
     # via -r semantic_search/requirements/prod.in
 pynacl==1.5.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   paramiko
+    # via paramiko
 pyparsing==3.0.9
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   matplotlib
     #   packaging
 pyrsistent==0.18.1
@@ -408,45 +350,41 @@ pytest-cov==3.0.0
     # via -r semantic_search/requirements/dev.in
 python-dateutil==2.8.2
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   analytics-python
     #   botocore
     #   dateparser
     #   gantry
+    #   jupyter-client
     #   matplotlib
     #   pandas
     #   wandb
 python-multipart==0.0.5
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 pytz==2022.2.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   dateparser
     #   pandas
 pytz-deprecation-shim==0.1.0.post0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   tzlocal
+    # via tzlocal
 pyyaml==6.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   clickclick
     #   connexion
     #   gantry
     #   huggingface-hub
     #   transformers
     #   wandb
+pyzmq==24.0.1
+    # via
+    #   ipykernel
+    #   jupyter-client
 regex==2022.3.2
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   dateparser
     #   nltk
     #   transformers
 requests==2.28.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   -r semantic_search/requirements/prod.in
     #   analytics-python
     #   connexion
@@ -457,13 +395,9 @@ requests==2.28.1
     #   transformers
     #   wandb
 rfc3986[idna2008]==1.5.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   httpx
+    # via httpx
 s3transfer==0.6.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   boto3
+    # via boto3
 scikit-learn==1.0.2
     # via sentence-transformers
 scipy==1.7.3
@@ -482,7 +416,6 @@ shortuuid==1.0.9
     # via wandb
 six==1.16.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   analytics-python
     #   docker-pycreds
     #   grpcio
@@ -493,36 +426,25 @@ six==1.16.0
     #   python-dateutil
     #   python-multipart
     #   wandb
-smart_open[s3]==6.1.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   -r semantic_search/requirements/prod.in
+smart-open[s3]==6.1.0
+    # via -r semantic_search/requirements/prod.in
 smmap==5.0.0
     # via gitdb
 sniffio==1.2.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   anyio
     #   httpcore
     #   httpx
 spinners==0.0.24
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   halo
+    # via halo
 starlette==0.19.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   fastapi
+    # via fastapi
 swagger-ui-bundle==0.0.9
     # via connexion
 tabulate==0.8.10
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 termcolor==1.1.0
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   halo
+    # via halo
 threadpoolctl==3.1.0
     # via scikit-learn
 tokenizers==0.12.1
@@ -539,23 +461,30 @@ torch==1.12.1
     #   torchvision
 torchvision==0.13.1
     # via sentence-transformers
+tornado==6.2
+    # via
+    #   ipykernel
+    #   jupyter-client
 tqdm==4.64.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   -r semantic_search/requirements/prod.in
     #   huggingface-hub
     #   nltk
     #   sentence-transformers
     #   transformers
+traitlets==5.4.0
+    # via
+    #   ipykernel
+    #   ipython
+    #   jupyter-client
+    #   jupyter-core
+    #   matplotlib-inline
 transformers==4.22.1
     # via sentence-transformers
 typeguard==2.13.3
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gantry
+    # via gantry
 typing-extensions==4.3.0
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   aiohttp
     #   anyio
     #   async-timeout
@@ -572,42 +501,32 @@ typing-extensions==4.3.0
     #   uvicorn
     #   yarl
 tzdata==2022.2
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   pytz-deprecation-shim
+    # via pytz-deprecation-shim
 tzlocal==4.2
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   dateparser
+    # via dateparser
 uc-micro-py==1.0.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   linkify-it-py
+    # via linkify-it-py
 ujson==5.4.0
     # via pymilvus
 urllib3==1.26.12
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   botocore
     #   requests
     #   sentry-sdk
 uvicorn==0.18.3
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   gradio
+    # via gradio
 wandb==0.12.17
     # via -r semantic_search/requirements/prod.in
+wcwidth==0.2.5
+    # via prompt-toolkit
 werkzeug==2.2.2
     # via
     #   connexion
     #   flask
 yarl==1.8.1
-    # via
-    #   -c semantic_search/requirements/prod.txt
-    #   aiohttp
+    # via aiohttp
 zipp==3.8.1
     # via
-    #   -c semantic_search/requirements/prod.txt
     #   importlib-metadata
     #   importlib-resources
     #   pep517

@@ -10,4 +10,4 @@ prometheus_client>=0.7.1,<0.8.0
 gunicorn>=20.0.4,<20.1.0
 numpy
 pillow<7.2
-sentence_transformers
+sentence-transformers

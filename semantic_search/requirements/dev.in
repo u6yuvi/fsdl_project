@@ -1,4 +1,3 @@
--c prod.txt
 build
 # versioned to give pip hints
 coverage[toml]==6.4
@@ -7,3 +6,4 @@ pytest-cov==3.0.0
 # versioned to match Google Colab
 #tornado>=5.1,<5.2
 # versioned to improve stability
+ ipykernel

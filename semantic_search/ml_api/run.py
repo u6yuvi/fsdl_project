@@ -5,8 +5,8 @@ import os
 print(os.getcwd())
 sys.path.append("/home/uv/Documents/backup/Documents/github/fsdl_project/semantic_search/ml_api/api")
 print(sys.path)
-from api.app import create_app
-from api.config import DevelopmentConfig, setup_app_logging
+from ml_api.api.app import create_app
+from ml_api.api.config import DevelopmentConfig, setup_app_logging
 from werkzeug.serving import run_simple
 
 

@@ -14,14 +14,14 @@ servers:
 paths:
   /:
     get:
-      operationId: api.controller.health
+      operationId: ml_api.api.controller.health
       responses:
         '200':
           description: API Health Status
 
   /v1/predictions:
     post:
-      operationId: api.controller.predict
+      operationId: ml_api.api.controller.predict
       requestBody:
         description: Text query to match an image
         required: true

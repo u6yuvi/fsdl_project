@@ -3,7 +3,7 @@ from flask.wrappers import Response
 from prometheus_client import Counter, Histogram
 import time
 
-from api.config import APP_NAME
+from ml_api.api.config import APP_NAME
 
 
 # Counter and Histogram are examples of default metrics
