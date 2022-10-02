@@ -41,6 +41,7 @@ def predict():
     if request.method == "POST":
         # Step 1: Extract POST data from request body as JSON
         json_data = request.get_json()
+        print("POST:", json_data)
 
         # Step 2: Access the model prediction function (also validates data)
         result = make_predictions(input_data=json_data)

@@ -1,6 +1,7 @@
 import logging
 
 import connexion
+from flask_cors import CORS
 from ml_api.api.config import Config
 from ml_api.api.monitoring.middleware import setup_metrics
 
@@ -15,6 +16,7 @@ def create_app(*, config_object: Config) -> connexion.App:
     )
     flask_app = connexion_app.app
     flask_app.config.from_object(config_object)
+    CORS(flask_app)
 
     # Setup prometheus monitoring
     setup_metrics(flask_app)
