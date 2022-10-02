@@ -17,3 +17,7 @@ pillow<7.2
 #markupsafe<2.1
 #for flask
 connexion[swagger-ui]
+wandb==0.12.17
+sentence-transformers
+pymilvus
+prometheus_client

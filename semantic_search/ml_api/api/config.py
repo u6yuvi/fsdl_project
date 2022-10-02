@@ -1,19 +1,13 @@
 import logging
 import os
-import pathlib
 import sys
 
-import api
-
-APP_NAME = 'ml_api'
+APP_NAME = "ml_api"
 
 # logging format
 FORMATTER = logging.Formatter(
-    "%(asctime)s — %(name)s — %(levelname)s —" "%(funcName)s:%(lineno)d — %(message)s"
+    "%(asctime)s — %(name)s — %(levelname)s —" "%(funcName)s:%(lineno)d — %(message)s"  # noqa
 )
-
-# Project Directories
-ROOT = pathlib.Path(api.__file__).resolve().parent.parent
 
 
 class Config:

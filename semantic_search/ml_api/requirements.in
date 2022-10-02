@@ -1,0 +1,13 @@
+# ML Model
+
+#connexion[swagger-ui]>=2.5.1,<2.6.0
+connexion[swagger-ui]
+openapi-spec-validator
+# Monitoring
+prometheus_client>=0.7.1,<0.8.0
+
+# Deployment
+gunicorn>=20.0.4,<20.1.0
+numpy
+sentence-transformers
+flask-cors

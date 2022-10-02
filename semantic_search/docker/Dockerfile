@@ -3,7 +3,7 @@ FROM python:3.9.5-slim-buster
 RUN mkdir -p /opt/app
 #COPY ml_api/requirements.txt /opt/app/requirements.txt
 COPY ml_api /opt/app/ml_api
-COPY semsearch_pkg/semsearch /opt/app/semsearch
+COPY semsearch /opt/app/semsearch
 COPY docker /opt/app/docker
 # COPY run.py /opt/app/run.py
 #COPY . /opt/app
@@ -16,7 +16,7 @@ RUN apt-get update -y && \
  	# for swagger
  	apt-get install -y curl
 
-RUN pip install -r /opt/app/ml_api/requirements.txt
+RUN pip install -r /opt/app/ml_api/requirements.in
 COPY ml_api/Makefile /opt/app/Makefile
 # COPY api /opt/app/api
 # COPY run.py /opt/app/run.py

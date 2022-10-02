@@ -1,22 +1,21 @@
-from flask import request, Flask
-from flask.wrappers import Response
-from prometheus_client import Counter, Histogram
 import time
 
-from api.config import APP_NAME
-
+from flask import Flask, request
+from flask.wrappers import Response
+from ml_api.api.config import APP_NAME
+from prometheus_client import Counter, Histogram
 
 # Counter and Histogram are examples of default metrics
 # available from the prometheus Python client.
 REQUEST_COUNT = Counter(
-    name='http_request_count',
-    documentation='App Request Count',
-    labelnames=['app_name', 'method', 'endpoint', 'http_status']
+    name="http_request_count",
+    documentation="App Request Count",
+    labelnames=["app_name", "method", "endpoint", "http_status"],
 )
 REQUEST_LATENCY = Histogram(
-    name='http_request_latency_seconds',
-    documentation='Request latency',
-    labelnames=['app_name', 'endpoint']
+    name="http_request_latency_seconds",
+    documentation="Request latency",
+    labelnames=["app_name", "endpoint"],
 )
 
 
@@ -27,10 +26,10 @@ def start_timer() -> None:
 
 def stop_timer(response: Response) -> Response:
     """Get stop time of a request.."""
-    request_latency = time.time() - request._prometheus_metrics_request_start_time
-    REQUEST_LATENCY.labels(
-        app_name=APP_NAME,
-        endpoint=request.path).observe(request_latency)
+    request_latency = time.time() - request._prometheus_metrics_request_start_time  # noqa
+    REQUEST_LATENCY.labels(app_name=APP_NAME, endpoint=request.path).observe(
+        request_latency
+    )
     return response
 
 
@@ -44,7 +43,8 @@ def record_request_data(response: Response) -> Response:
         app_name=APP_NAME,
         method=request.method,
         endpoint=request.path,
-        http_status=response.status_code).inc()
+        http_status=response.status_code,
+    ).inc()
     return response
 
 
