@@ -1,11 +1,11 @@
+import base64
+import os
+from io import BytesIO
+
+from PIL import Image
 from semsearch.encoding import clip_encoding
 from semsearch.load import load_corpus, load_model
 from semsearch.retrieval import search
-from PIL import Image
-import base64
-from io import BytesIO
-import os
-
 
 corpus = load_corpus()
 model = load_model()

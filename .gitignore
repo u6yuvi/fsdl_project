@@ -3,6 +3,8 @@ data/downloaded
 data/processed
 data/interim
 
+abo*/
+
 
 # Editors
 .vscode

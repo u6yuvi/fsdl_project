@@ -9,4 +9,4 @@ pytest-cov==3.0.0
 ipykernel
 isort
 isort
-flake8>=3.7.9,<4.0
+flake8s

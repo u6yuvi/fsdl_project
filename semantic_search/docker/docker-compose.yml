@@ -4,7 +4,7 @@ services:
     build:
       context: ../
       dockerfile: docker/Dockerfile
-    container_name: ml_api 
+    container_name: ml_api
     depends_on:
       - cadvisor
     expose:
@@ -12,6 +12,15 @@ services:
     ports:
       - "5000:5000"   # expose webserver to localhost host:container
     command: bash -c "make run-service-development"
+
+  search_ui:
+    build:
+      context: ../
+      dockerfile: search_ui/Dockerfile
+    expose:
+      - 80
+    ports:
+      - '80:80'
 
   prometheus:
     image: prom/prometheus
@@ -50,6 +59,21 @@ services:
     ports:
       - 8080:8080
 
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - postgres_data:/var/lib/posgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
 volumes:
   prometheus_data: {}
   grafana_data: {}
+  postgres_data: {}

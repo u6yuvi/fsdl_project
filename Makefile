@@ -8,13 +8,11 @@ conda-update:
 	echo "!!!RUN THE conda activate COMMAND ABOVE RIGHT NOW!!!"
 
 # Install exact pip packages
-# flake8 has conflicts with importlib_metadata, so needs to be installed separately
 pip-tools:
 	pip install pip-tools==6.3.1 setuptools==59.5.0
 	pip-sync semantic_search/fsdl_project.txt
 	python -m build semantic_search
 	pip install -e semantic_search
-	# pip install flake8
 
 # Bump versions of transitive dependencies, compile
 pip-tools-upgrade:
