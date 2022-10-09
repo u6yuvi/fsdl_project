@@ -1,7 +1,7 @@
 import numpy as np
 import flask
 from flask import jsonify, request
-from ml_api.api.config import APP_NAME
+from ml_api_milvus.api.config import APP_NAME
 from prometheus_client import Gauge, Histogram, Info
 from PIL import Image
 import base64
@@ -14,13 +14,25 @@ import time
 
 PREDICTION_TRACKER = Histogram(
     name="similarity_prediction",
-    documentation="ML Model Prediction on House Price",
+    documentation="ML Model Prediction on similarity",
     labelnames=["app_name", "model_name", "model_version"],
 )
 
 PREDICTION_GAUGE = Gauge(
     name="similarity_gauge",
     documentation="ML Model Prediction on House Price for min max calcs",
+    labelnames=["app_name", "model_name", "model_version"],
+)
+
+PREDICTION_LATENCY = Histogram(
+    name="similarity_search_latency",
+    documentation="latency on similarity search",
+    labelnames=["app_name", "model_name", "model_version"],
+)
+
+LATENCY_GAUGE = Gauge(
+    name="similarity_search_latency_gauge",
+    documentation="Search latency min/max",
     labelnames=["app_name", "model_name", "model_version"],
 )
 
@@ -112,12 +124,12 @@ def predict():
         PREDICTION_GAUGE.labels(
             app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
         ).set(mean_score)
-        #PREDICTION_TRACKER.labels(
-        #    app_name=APP_NAME, collection="fsdl_ip", metric="ip"
-        #).observe(latency)
-        #PREDICTION_GAUGE.labels(
-        #    app_name=APP_NAME, collection="fsdl_ip", metric="ip"
-        #).set(latency)
+        PREDICTION_LATENCY.labels(
+            app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
+        ).observe(latency)
+        LATENCY_GAUGE.labels(
+            app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
+        ).set(latency)
 
         # Step 5: Prepare prediction response
         return jsonify(
