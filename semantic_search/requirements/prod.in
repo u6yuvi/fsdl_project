@@ -21,4 +21,4 @@ wandb==0.12.17
 sentence-transformers
 pymilvus
 prometheus_client
-sqlalchemy
+flask-cors==3.0.10
