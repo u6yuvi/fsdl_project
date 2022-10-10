@@ -4,8 +4,8 @@ import connexion
 import flask
 from flask_cors import CORS
 
-from ml_api.api.config import Config
-from ml_api.api.monitoring.middleware import setup_metrics
+from ml_api_milvus.api.config import Config
+from ml_api_milvus.api.monitoring.middleware import setup_metrics
 
 from pymilvus import (
     connections,
@@ -19,7 +19,8 @@ _logger = logging.getLogger(__name__)
 def load_corpus():
     connections.connect("default", host="34.168.23.74", port="19530")
     #TODO test if connexion exists
-    collection_ip = "fsdl_cosine"
+    #collection_ip = "fsdl_cosine"
+    collection_ip = "fsdl_ip"
     fsdl_ip= Collection(collection_ip)
     _logger.info(fsdl_ip)
     fsdl_ip.load()
