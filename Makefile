@@ -13,6 +13,9 @@ pip-tools:
 	pip-sync semantic_search/fsdl_project.txt
 	python -m build semantic_search
 	pip install -e semantic_search
+	pushd  semantic_search/search_ui
+	npm install
+	popd
 
 # Bump versions of transitive dependencies, compile
 pip-tools-upgrade:
@@ -22,8 +25,13 @@ pip-tools-upgrade:
 	echo "!!! make pip-tools !!!"
 
 # Fix lint as much as possible, give messages on the rest
-# not running back as it makes too many changes, run it when needed
-# python -m black .
 lint:
-	isort .
-	flake8 .
+	isort semantic_search/semsearch
+	isort  semantic_search/ml_api
+	isort  semantic_search/ml_api_milvus
+	black --line-length 79 semantic_search/semsearch
+	black --line-length 79 semantic_search/ml_api
+	black --line-length 79 semantic_search/ml_api_milvus
+	flake8 semantic_search/semsearch
+	flake8  semantic_search/ml_api
+	flake8  semantic_search/ml_api_milvus

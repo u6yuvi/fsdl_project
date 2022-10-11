@@ -1,3 +1,4 @@
+<!-- Source: https://svelte.dev/repl/b6a9c67f21944c1c8ad2378a07c3cd48?version=3.32.3 -->
 <script>
 	import { fade, slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';

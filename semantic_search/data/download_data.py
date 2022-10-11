@@ -1,16 +1,19 @@
-import requests
-import os
-import tarfile
-from tqdm import tqdm
-import pathlib
 import functools
+import json
+import os
+import pathlib
 import shutil
+import tarfile
+from pathlib import Path
+
 import click
 import pandas as pd
 import redis
+import requests
 from redis.commands.json.path import Path as redPath
-from pathlib import Path
-import json
+from tqdm import tqdm
+from collections import OrderedDict
+
 
 data_dir = Path('semantic_search/data/abo/')
 
@@ -27,14 +30,23 @@ csv = data_dir / 'images' /'metadata'/'images.csv.gz'
 r = redis.Redis(host="localhost", port=6379)
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
+class OrderedGroup(click.Group):
+    def __init__(self, name=None, commands=None, **attrs):
+        super(OrderedGroup, self).__init__(name, commands, **attrs)
+        #: the registered subcommands by their exported names.
+        self.commands = commands or OrderedDict()
 
-@click.group(context_settings=CONTEXT_SETTINGS)
+    def list_commands(self, ctx):
+        return self.commands
+
+
+@click.group(cls=OrderedGroup, context_settings=CONTEXT_SETTINGS)
 def cli():
     pass
 
 @cli.command()
 def download():
-    """Downloads the Amazon-Berkley Objects dataset and continues"""
+    """Downloads the Amazon-Berkley Objects dataset to 'abo' directory and continues"""
     response = requests.get(url+filename, stream=True)
     if response.status_code != 200:
             response.raise_for_status()  # Will only raise for 4xx codes, so...
@@ -68,7 +80,7 @@ def download():
 
 @cli.command(name='extract')
 def extract():
-    "Untars the ABO dataset and continues"
+    "Untars the ABO dataset from 'abo' directory and continues"
     _extract()
 
 def _extract():
@@ -87,7 +99,10 @@ def _extract():
 
 @cli.command()
 def add():
-    "Adds the untared metadata to redis db. Ensure redis is running"
+    """Adds the untared metadata to redis db. Ensure redis is running.
+    The image metadata is with `IMG:image_id` key.
+    The photo (flat file) name to image_id mapping is with `MAP:name` key
+    """
     _add()
 
 def _add():
