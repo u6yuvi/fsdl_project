@@ -6,7 +6,7 @@
 # start up Flask API service
 run-service-development:
 	@echo "+ $@"
-	python ml_api/run.py
+	python ml_api_milvus/run.py
 
 run-service-wsgi:
 	@echo "+ $@"
