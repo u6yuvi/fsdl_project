@@ -1,12 +1,14 @@
 import numpy as np
 import flask
-from flask import jsonify, request
+from flask import jsonify, request,current_app
 from ml_api_milvus.api.config import APP_NAME
 from prometheus_client import Gauge, Histogram, Info
 from PIL import Image
 import base64
 from io import BytesIO
 import requests
+from ml_api_milvus.api.persistence.data_access import PredictionPersistence, ModelType
+
 
 import time
 # sys.path.append("../semantic_search/semsearch_pkg/")
@@ -131,6 +133,13 @@ def predict():
             app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
         ).set(latency)
 
+        persistence = PredictionPersistence(db_session=flask.g.db_session)
+        persistence.save_predictions(
+            inputs=json_data,
+            model_version="0.1.0",
+            predictions=result,
+            db_model=ModelType.ClipModel,
+        )
         # Step 5: Prepare prediction response
         return jsonify(
             {"predictions": result, "version": "0.1.1", "errors": []})

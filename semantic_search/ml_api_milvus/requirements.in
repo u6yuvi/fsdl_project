@@ -14,5 +14,10 @@ flask-cors
 
 #Persistence DB
 sqlalchemy>=1.3.11,<1.4.0 # ORM
-psycopg2>=2.8.4,<2.9.0  # DB Driver
+#psycopg2>=2.8.4,<2.9.0  # DB Driver
+psycopg2-binary
+
+#vector-database
+pymilvus
+
 

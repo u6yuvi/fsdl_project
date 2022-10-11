@@ -9,7 +9,11 @@ FORMATTER = logging.Formatter(
     "%(asctime)s — %(name)s — %(levelname)s —" "%(funcName)s:%(lineno)d — %(message)s"  # noqa
 )
 
-
+# refer docker-compose.yml and docker-compose_test.yml
+DB_USER = os.getenv("DB_USER","user")
+DB_PASSWORD = os.getenv("DB_PASSWORD","password")
+DB_HOST = os.getenv("DB_HOST","database")
+DB_NAME = os.getenv("DB_NAME","ml_api")
 class Config:
     DEBUG = False
     TESTING = False
@@ -17,6 +21,11 @@ class Config:
     SERVER_PORT = int(os.getenv("SERVER_PORT", 5000))
     SERVER_HOST = os.getenv("SERVER_HOST", "0.0.0.0")
     LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", logging.INFO)
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql+psycopg2://{DB_USER}:"
+        f"{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+    )
+
 
 
 class DevelopmentConfig(Config):
