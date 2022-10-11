@@ -17,7 +17,8 @@ class Config:
     SERVER_PORT = int(os.getenv("SERVER_PORT", 5000))
     SERVER_HOST = os.getenv("SERVER_HOST", "0.0.0.0")
     LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", logging.INFO)
-
+    REDIS_HOST = os.getenv("REDIS_HOST", "0.0.0.0")
+    REDIS_PORT = os.getenv("REDIS_PORT", 6379)
 
 class DevelopmentConfig(Config):
     DEBUG = True
