@@ -101,7 +101,7 @@
               background-color:white; color:black;"
               >Score: {images[index].alt}</span
             >
-            <StarRating />
+            <StarRating key={index} />
           </div>
         </Gallery>
         {#if images[imgIndex]}

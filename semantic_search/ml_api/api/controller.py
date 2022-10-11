@@ -70,4 +70,12 @@ def predict():
 
         # Step 5: Prepare prediction response
         return jsonify(
-            {"predictions": result, "version": "0.1.0", "errors": []})
+            {"predictions": result, "version": "0.1.0", "errors": []}
+        )
+
+
+def feedback():
+    if request.method == "POST":
+        # Step 1: Extract POST data from request body as JSON
+        json_data = request.get_json()
+        print("feedback POST:", json_data)
