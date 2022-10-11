@@ -3,6 +3,7 @@ import logging
 import connexion
 import flask
 from flask_cors import CORS
+import redis
 
 from ml_api_milvus.api.config import Config
 from ml_api_milvus.api.monitoring.middleware import setup_metrics
@@ -48,13 +49,16 @@ def create_app(*, config_object: Config) -> connexion.App:
     connexion_app.add_api("api.yaml")
     #make the flak app the current context so we could share the corpus
     flask_app.app_context().push()
- 
+
     #the api server will serve the images from here
     fsdl_ip = load_corpus()
     flask.g.fsdl_ip = fsdl_ip
 
     model = load_model()
     flask.g.model = model
+    flask.g.redis = redis.Redis(
+        host=config_object.REDIS_HOST, port=config_object.REDIS_PORT,
+        charset="utf-8", decode_responses=True)
 
 
     _logger.info("Application instance created")

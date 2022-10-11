@@ -8,5 +8,5 @@ pytest-cov==3.0.0
 # versioned to improve stability
 ipykernel
 isort
-isort
-flake8>=3.7.9,<4.0
+flake8
+black

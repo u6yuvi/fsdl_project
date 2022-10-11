@@ -71,11 +71,12 @@ def make_predictions(input_data):
     }
 
     start_time = time.time()
-    result = flask.g.fsdl_ip.search(vectors_to_search, "embeddings", 
+    result = flask.g.fsdl_ip.search(vectors_to_search, "embeddings",
                                 search_params, limit=3, output_fields=["img_name"])
     end_time = time.time()
     latency = end_time - start_time
     hit_list = []
+    redis = flask.g.redis
     for hits in result:
         for h in hits:
             hh = {}
@@ -95,6 +96,12 @@ def make_predictions(input_data):
             hh['name'] = name
             hh['img_url'] = img_url
             hh['score'] = h.distance
+            print('MAP:' + name)
+            img_id = redis.get('MAP:' + str(name))
+            print('IMG:'+ img_id)
+            hh['metadata'] = redis.json().get('IMG:' + img_id)
+            print("image return")
+            print(hh['metadata'])
             hit_list.append(hh)
     return hit_list, latency
 

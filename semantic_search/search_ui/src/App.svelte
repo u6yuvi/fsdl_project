@@ -4,28 +4,22 @@
     Theme,
     RadioButtonGroup,
     RadioButton,
-    Select,
-    SelectItem,
   } from "carbon-components-svelte";
-  import {
-    TextInput,
-    Header,
-    Content,
-    Tooltip,
-  } from "carbon-components-svelte";
-  import { ImageLoader, Button, Popover } from "carbon-components-svelte";
+  import { TextInput, Header, Content } from "carbon-components-svelte";
+  import { Button } from "carbon-components-svelte";
   import ImageSearch from "carbon-icons-svelte/lib/ImageSearch.svelte";
-  import { Grid, Row, Column } from "carbon-components-svelte";
-  import { writable } from "svelte/store";
-  import { onMount } from "svelte";
+  import { Grid, Row } from "carbon-components-svelte";
   import Gallery from "svelte-brick-gallery";
+  import { Modal } from "carbon-components-svelte";
+  import StarRating from "./StarRating.svelte";
+
+  let open = false;
+  let imgIndex = 0;
 
   let theme = "g80"; // "white" | "g10" | "g80" | "g90" | "g100"
 
   $: document.documentElement.setAttribute("theme", theme);
   let searchText = "";
-  let imageLoader;
-  let error;
   const fetchImage = async () => {
     if (!searchText) {
       return [];
@@ -39,7 +33,10 @@
       body: JSON.stringify(searchText),
     });
     const resp = await response.json();
-    return resp.predictions;
+    return resp.predictions.map((p) => ({
+      ...p,
+      metadata: JSON.parse(p.metadata),
+    }));
   };
   let promise;
   const clickGetImage = () => {
@@ -88,12 +85,15 @@
               src={images[index].src}
               {style}
               alt={images[index].score}
+              on:click={() => {
+                open = true;
+                imgIndex = index;
+              }}
             />
             <span
               style="position:absolute; z-index:2; top:0; left:0; padding:2px;
               opacity: 70%; border-radius: 5px; background-color:white;
-              color:black;"
-              >{images[index].name}</span
+              color:black;">{images[index].name}</span
             >
             <span
               style="position:absolute; z-index:2; bottom:0; right:0;
@@ -101,10 +101,35 @@
               background-color:white; color:black;"
               >Score: {images[index].alt}</span
             >
+            <StarRating />
           </div>
         </Gallery>
+        {#if images[imgIndex]}
+          <Modal
+            passiveModal
+            bind:open
+            modalHeading="Details"
+            on:close={() => (open = false)}
+            on:open
+            on:submit={() => (open = false)}
+          >
+            {#each Object.entries(images[imgIndex].metadata) as [key, values]}
+              <p style="align:center; color:lightgreen">
+                <b>{key.toUpperCase()}</b>
+              </p>
+              {#if Array.isArray(values)}
+                {#each values as val}
+                  <p>{val}</p>
+                {/each}
+              {:else}
+                <p>{values}</p>
+              {/if}
+            {/each}
+          </Modal>
+        {/if}
       {:catch error}
         <p>An error occurred!</p>
+        <p>{error}</p>
       {/await}
     {/if}
   </Grid>
