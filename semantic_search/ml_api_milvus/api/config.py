@@ -6,7 +6,8 @@ APP_NAME = "ml_api"
 
 # logging format
 FORMATTER = logging.Formatter(
-    "%(asctime)s — %(name)s — %(levelname)s —" "%(funcName)s:%(lineno)d — %(message)s"  # noqa
+    "%(asctime)s — %(name)s — %(levelname)s —"
+    "%(funcName)s:%(lineno)d — %(message)s"  # noqa
 )
 
 
@@ -19,6 +20,7 @@ class Config:
     LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", logging.INFO)
     REDIS_HOST = os.getenv("REDIS_HOST", "0.0.0.0")
     REDIS_PORT = os.getenv("REDIS_PORT", 6379)
+
 
 class DevelopmentConfig(Config):
     DEBUG = True

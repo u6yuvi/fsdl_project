@@ -9,6 +9,7 @@ def cosine_search(query, corpus, k=3):
     # between the query embedding and all image embeddings.
     # It then returns the top_k highest ranked images, which we output
     hits = util.semantic_search(
-        query["query_embed"], corpus["embeddings"], top_k=k)[0]
+        query["query_embed"], corpus["embeddings"], top_k=k
+    )[0]
 
     return hits

@@ -2,6 +2,7 @@ import numpy as np
 from flask import jsonify, request
 from ml_api.api.config import APP_NAME
 from prometheus_client import Gauge, Histogram, Info
+
 # sys.path.append("../semantic_search/semsearch_pkg/")
 from semsearch.predict import make_predictions
 
