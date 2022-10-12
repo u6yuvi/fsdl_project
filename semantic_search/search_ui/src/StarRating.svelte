@@ -1,11 +1,11 @@
-<!-- Source: https://svelte.dev/repl/b6a9c67f21944c1c8ad2378a07c3cd48?version=3.32.3 -->
+<!-- Inspired from: https://svelte.dev/repl/b6a9c67f21944c1c8ad2378a07c3cd48?version=3.32.3 -->
+<!-- Made with svelte carbon components -->
 <script>
-	import { fade, slide } from "svelte/transition";
-	import { quintOut } from "svelte/easing";
-	import Star from "./Star.svelte";
-	import { LogicalPartition } from "carbon-icons-svelte";
-	// import Star from "carbon-icons-svelte/lib/Star.svelte";
+	import Star from "carbon-icons-svelte/lib/Star.svelte";
 	export let key = 1;
+	import { Button } from "carbon-components-svelte";
+	import StarFilled from "carbon-icons-svelte/lib/StarFilled.svelte";
+	import { Modal, Form, TextArea } from "carbon-components-svelte";
 
 	// User rating states
 	let rating = null;
@@ -35,7 +35,7 @@
 	}
 	function userClickedOutsideOfFeedback(event) {
 		const container = document.getElementById("feedbackContiner" + key);
-		if (!container.contains(event.target)) {
+		if (!container?.contains(event.target)) {
 			collectFeedback = false;
 		}
 	}
@@ -59,13 +59,11 @@
 			rating &&
 			rating.toString() === event.srcElement.dataset.starid
 		) {
-			console.log("Not handling");
 			collectFeedback = false;
 			return;
 		}
 		rating = id;
 		collectFeedback = true;
-		console.log("feedback rating:", rating);
 	};
 
 	let stars = [
@@ -82,13 +80,14 @@
 
 		// let them know we recieved it
 		feedbackCompleted = true;
-		console.log("text feedback:", value);
-		sendFeedback({ star: rating, text: value })
+		if (rating !== null) {
+			sendFeedback({ star: rating, text: value, imgIndex: key });
+		}
 		// then reset view
 		setTimeout(() => {
 			collectFeedback = false;
 			feedbackCompleted = false;
-		}, 1250);
+		}, 500);
 	}
 
 	const sendFeedback = async (rate_obj) => {
@@ -109,23 +108,23 @@
 	}
 </script>
 
-<div class="feedback">
-	<span
-		id={"feedbackContiner" + key}
-		class="feedbackContainer"
-		class:feedbackContainerDisabled={feedbackCompleted}
-	>
+<div>
+	<span id={"feedbackContiner" + key}>
 		<span class="starContainer">
 			{#each stars as star (star.id)}
-				<Star
-					filled={hoverRating
-						? hoverRating >= star.id
-						: rating >= star.id}
-					starId={star.id}
+				<Button
+					kind="ghost"
+					id={star.id.toString()}
 					on:mouseover={handleHover(star.id)}
 					on:mouseleave={() => (hoverRating = null)}
 					on:click={handleRate(star.id)}
-				/>
+				>
+					{#if hoverRating ? hoverRating >= star.id : rating >= star.id}
+						<StarFilled size={24} />
+					{:else}
+						<Star size={24} />
+					{/if}
+				</Button>
 			{/each}
 		</span>
 		<br />
@@ -146,83 +145,61 @@
 			{/if}
 		</p>
 		<br />
-		<p>
-			CollectFeedback {collectFeedback} FeedBack Completed: {feedbackCompleted}
-		</p>
 		{#if collectFeedback}
-			<div class="collectFeedbackContainer" transition:fade>
-				{#if feedbackCompleted}
-					<p>Thank you!</p>
-				{:else}
-					<form
-						on:submit|preventDefault={handleCollectFeedback}
-						transition:slide={{ duration: 450 }}
+			<Modal
+				bind:open={collectFeedback}
+				passiveModal
+				modalHeading="Feedback"
+				on:open
+				on:close={() => {
+					rating = null;
+					collectFeedback = false;
+				}}
+			>
+				<Form
+					on:submit={(e) => {
+						e.preventDefault();
+						handleCollectFeedback(e);
+					}}
+				>
+					<p style="align-content:center;">
+						You've selected {rating ? rating : "no"} star{rating ===
+						1
+							? ""
+							: "s"}, Please tell us why you gave us this rating
+					</p>
+					<TextArea />
+					<Button kind="tertiary" size="small" type="submit">
+						Send Feedback
+					</Button>
+					<Button
+						kind="tertiary"
+						size="small"
+						type="cancel"
+						on:click={() => {
+							collectFeedback = false;
+							rating = null;
+						}}
 					>
-						<p>
-							You've selected {rating ? rating : "no"} star{rating ===
-							1
-								? ""
-								: "s"},
-							<br />
-							please tell us why you gave us this rating
-						</p>
-						<textarea />
-						<button> Send Feedback </button>
-						<button
-							on:click={() => (collectFeedback = false)}
-							type="button"
-							class="cancel"
-						>
-							No Thanks
-						</button>
-					</form>
-				{/if}
-			</div>
+						No Thanks
+					</Button>
+				</Form>
+			</Modal>
 		{/if}
 	</span>
 </div>
 
 <style>
-	.feedback {
-		position: relative;
-	}
-	.collectFeedbackContainer {
-		width: 300px;
-		position: absolute;
-		top: 44px;
-		left: 0;
-		background: #fff;
-		border: 1px solid #666;
-		padding: 8px;
-		transition: transform 0.2s ease-out;
-	}
-	.collectFeedbackContainer textarea {
-		display: block;
-		width: 100%;
-		height: 120px;
-		resize: none;
-	}
-	.cancel {
-		background: none;
-		text-decoration: underline;
-		border: none;
-	}
 	.starContainer {
 		display: inline-block;
 		transition: background 0.2s ease-out;
 		border-radius: 8px;
 		padding: 4px 6px 0;
 	}
-	.feedbackContainer:hover .starContainer {
-		background: #efefef;
-	}
 	.secondaryAction {
 		margin: 8px;
 		font-size: 12px;
 		display: inline-block;
-	}
-	.feedbackContainerDisabled {
-		pointer-events: none;
 	}
 	:global(button) {
 		cursor: pointer;
