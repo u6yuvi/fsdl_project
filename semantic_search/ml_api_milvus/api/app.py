@@ -2,34 +2,30 @@ import logging
 
 import connexion
 import flask
-from flask_cors import CORS
 import redis
-
+from flask_cors import CORS
 from ml_api_milvus.api.config import Config
 from ml_api_milvus.api.monitoring.middleware import setup_metrics
-
-from pymilvus import (
-    connections,
-    Collection,
-)
-
+from pymilvus import Collection, connections
 from sentence_transformers import SentenceTransformer
 
 _logger = logging.getLogger(__name__)
 
+
 def load_corpus():
     connections.connect("default", host="34.168.23.74", port="19530")
-    #TODO test if connexion exists
-    #collection_ip = "fsdl_cosine"
+    # TODO test if connexion exists
+    # collection_ip = "fsdl_cosine"
     collection_ip = "fsdl_ip"
-    fsdl_ip= Collection(collection_ip)
+    fsdl_ip = Collection(collection_ip)
     _logger.info(fsdl_ip)
     fsdl_ip.load()
-    _logger.info(collection_ip+" loaded.")
+    _logger.info(collection_ip + " loaded.")
     return fsdl_ip
 
+
 def load_model():
-    img_model = SentenceTransformer('clip-ViT-B-32')
+    img_model = SentenceTransformer("clip-ViT-B-32")
     return img_model
 
 
@@ -47,19 +43,22 @@ def create_app(*, config_object: Config) -> connexion.App:
     setup_metrics(flask_app)
 
     connexion_app.add_api("api.yaml")
-    #make the flak app the current context so we could share the corpus
+    # make the flak app the current context so we could share the corpus
     flask_app.app_context().push()
 
-    #the api server will serve the images from here
+    # the api server will serve the images from here
     fsdl_ip = load_corpus()
     flask.g.fsdl_ip = fsdl_ip
 
     model = load_model()
     flask.g.model = model
     flask.g.redis = redis.Redis(
-        host=config_object.REDIS_HOST, port=config_object.REDIS_PORT, password=config_object.REDIS_PASSWORD,
-        charset="utf-8", decode_responses=True)
-
+        host=config_object.REDIS_HOST,
+        port=config_object.REDIS_PORT,
+        password=config_object.REDIS_PASSWORD,
+        charset="utf-8",
+        decode_responses=True,
+    )
 
     _logger.info("Application instance created")
 

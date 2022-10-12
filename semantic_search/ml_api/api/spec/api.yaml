@@ -39,9 +39,33 @@ paths:
         '5XX':
           description: Unexpected error
 
+  /v1/feedback:
+    post:
+      operationId: ml_api.api.controller.feedback
+      requestBody:
+        description: Get prediction feedback
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              items:
+                $ref: '#/components/schemas/Feedback'
+      responses:
+        '200':
+          description: Feedback taken
+        '400':
+          description: Bad request, malformed feedback
+        '5XX':
+          description: Unexpected error
+
 components:
   schemas:
     SearchDetails:
       type: object
       description: "Text Query."
       example: "sample_query"
+    Feedback:
+      type: object
+      description: "Feedback"
+      example: {'star': 3, 'text': 'feedback text'}
