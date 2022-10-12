@@ -63,3 +63,4 @@ lab9/requirements.txt
 requirements/dev-lint.txt
 bootstrap.py
 semantic_search/volumes/
+semantic_search/k8s/.kube/postgres/password.txt

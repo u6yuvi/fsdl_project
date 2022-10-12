@@ -549,3 +549,5 @@ zipp==3.8.1
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
+# extra packages added manually
+redis==4.3.4
