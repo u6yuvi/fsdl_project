@@ -8,10 +8,10 @@ pytest-cov==3.0.0
 # versioned to improve stability
 ipykernel
 isort
-isort
 flake8>=3.7.9,<4.0
 
 #Persistence DB
 sqlalchemy>=1.3.11,<1.4.0 # ORM
 #psycopg2>=2.8.4,<2.9.0  # DB Driver
 psycopg2-binary
+black

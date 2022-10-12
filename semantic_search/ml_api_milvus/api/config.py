@@ -27,6 +27,8 @@ class Config:
     )
 
 
+    REDIS_HOST = os.getenv("REDIS_HOST", "0.0.0.0")
+    REDIS_PORT = os.getenv("REDIS_PORT", 6379)
 
 class DevelopmentConfig(Config):
     DEBUG = True
