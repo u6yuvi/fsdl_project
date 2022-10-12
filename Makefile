@@ -13,9 +13,6 @@ pip-tools:
 	pip-sync semantic_search/fsdl_project.txt
 	python -m build semantic_search
 	pip install -e semantic_search
-	pushd  semantic_search/search_ui
-	npm install
-	popd
 
 # Bump versions of transitive dependencies, compile
 pip-tools-upgrade:

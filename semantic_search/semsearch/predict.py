@@ -19,12 +19,12 @@ def make_predictions(input_data):
     for h in hits:
         # Currently this returns the image as uri
         # If the images are available online, this can be changed to url
-        name = corpus['img_names'][h['corpus_id']]
+        name = corpus["img_names"][h["corpus_id"]]
         img = Image.open(name)
         data = BytesIO()
         img.save(data, "JPEG")
         data64 = base64.b64encode(data.getvalue())
-        h['src'] = u'data:img/jpeg;base64,'+data64.decode('utf-8')
-        h['alt'] = round(h['score'], 2)
-        h['name'] = os.path.basename(name)
+        h["src"] = "data:img/jpeg;base64," + data64.decode("utf-8")
+        h["alt"] = round(h["score"], 2)
+        h["name"] = os.path.basename(name)
     return hits

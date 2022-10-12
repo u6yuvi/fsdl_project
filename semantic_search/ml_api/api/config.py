@@ -6,7 +6,8 @@ APP_NAME = "ml_api"
 
 # logging format
 FORMATTER = logging.Formatter(
-    "%(asctime)s — %(name)s — %(levelname)s —" "%(funcName)s:%(lineno)d — %(message)s"  # noqa
+    "%(asctime)s — %(name)s — %(levelname)s —"
+    "%(funcName)s:%(lineno)d — %(message)s"  # noqa
 )
 
 DB_USER = "test_user"

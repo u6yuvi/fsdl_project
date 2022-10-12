@@ -11,7 +11,8 @@ model = load_clip_model()
 # First, we encode the query (which can either be an image or a text string)
 def get_text_embeddings(query):
     query_emb = model.encode(
-        [query], convert_to_tensor=True, show_progress_bar=False)
+        [query], convert_to_tensor=True, show_progress_bar=False
+    )
     query_emb = query_emb / np.linalg.norm(query_emb, axis=1, keepdims=True)
     return query_emb
 

@@ -26,7 +26,9 @@ def start_timer() -> None:
 
 def stop_timer(response: Response) -> Response:
     """Get stop time of a request.."""
-    request_latency = time.time() - request._prometheus_metrics_request_start_time  # noqa
+    request_latency = (
+        time.time() - request._prometheus_metrics_request_start_time
+    )  # noqa
     REQUEST_LATENCY.labels(app_name=APP_NAME, endpoint=request.path).observe(
         request_latency
     )

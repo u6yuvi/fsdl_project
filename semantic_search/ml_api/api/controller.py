@@ -2,6 +2,7 @@ import numpy as np
 from flask import jsonify, request, current_app
 from ml_api.api.config import APP_NAME
 from prometheus_client import Gauge, Histogram, Info
+
 # sys.path.append("../semantic_search/semsearch_pkg/")
 from semsearch.predict import make_predictions
 from ml_api.api.persistence.data_access import PredictionPersistence, ModelType
@@ -78,4 +79,12 @@ def predict():
         )
         # Step 5: Prepare prediction response
         return jsonify(
-            {"predictions": result, "version": "0.1.0", "errors": []})
+            {"predictions": result, "version": "0.1.0", "errors": []}
+        )
+
+
+def feedback():
+    if request.method == "POST":
+        # Step 1: Extract POST data from request body as JSON
+        json_data = request.get_json()
+        print("feedback POST:", json_data)
