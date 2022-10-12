@@ -57,7 +57,7 @@ def create_app(*, config_object: Config) -> connexion.App:
     model = load_model()
     flask.g.model = model
     flask.g.redis = redis.Redis(
-        host=config_object.REDIS_HOST, port=config_object.REDIS_PORT,
+        host=config_object.REDIS_HOST, port=config_object.REDIS_PORT, password=config_object.REDIS_PASSWORD,
         charset="utf-8", decode_responses=True)
 
 
