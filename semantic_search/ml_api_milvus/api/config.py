@@ -19,6 +19,7 @@ class Config:
     LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", logging.INFO)
     REDIS_HOST = os.getenv("REDIS_HOST", "0.0.0.0")
     REDIS_PORT = os.getenv("REDIS_PORT", 6379)
+    REDIS_PASSWORD = os.getenv("REDIS_PASSWORD", '')
 
 class DevelopmentConfig(Config):
     DEBUG = True
