@@ -4,6 +4,7 @@ import connexion
 import flask
 import redis
 from flask_cors import CORS
+from ml_api_milvus.api.persistence.core import init_database
 from ml_api_milvus.api.config import Config
 from ml_api_milvus.api.monitoring.middleware import setup_metrics
 from pymilvus import Collection, connections
@@ -39,6 +40,10 @@ def create_app(*, config_object: Config) -> connexion.App:
     flask_app.config.from_object(config_object)
     CORS(flask_app)
 
+     # Setup database
+    db_session = init_database(flask_app, config=config_object)
+
+
     # Setup prometheus monitoring
     setup_metrics(flask_app)
 
@@ -52,6 +57,11 @@ def create_app(*, config_object: Config) -> connexion.App:
 
     model = load_model()
     flask.g.model = model
+    _logger.info("Model loaded.")
+
+    flask.g.db_session = db_session
+    _logger.info("Postgres connection established.")
+
     flask.g.redis = redis.Redis(
         host=config_object.REDIS_HOST,
         port=config_object.REDIS_PORT,
@@ -59,6 +69,7 @@ def create_app(*, config_object: Config) -> connexion.App:
         charset="utf-8",
         decode_responses=True,
     )
+    _logger.info("Connected to Redis")
 
     _logger.info("Application instance created")
 
