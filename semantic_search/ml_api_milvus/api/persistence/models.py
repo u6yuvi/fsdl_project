@@ -18,5 +18,17 @@ class LiveModelPredictions(Base):
     outputs = Column(JSONB)
 
 
-# class ShadowModelPredictions(Base):
-#     raise NotImplementedError
+class ModelFeedback(Base):
+    """
+    Schema for Storing Model Feedback
+    """
+    __tablename__ = "clip_model_feedback"
+    __table_args__ = {'extend_existing': True}
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String(36), nullable=False)
+    datetime_captured = Column(
+        DateTime(timezone=True), server_default=func.now(), index=True
+    )
+    model_version = Column(String(36), nullable=False)
+    inputs = Column(JSONB)
+    #outputs = Column(JSONB)

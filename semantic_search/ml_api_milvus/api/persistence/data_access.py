@@ -15,7 +15,7 @@ _logger = logging.getLogger(__name__)
 
 class ModelType(enum.Enum):
     ClipModel = "clip"
-    Shadow_Model = "unknown"
+    ModelFeedback = "clip_feedback"
 
 
 class PredictionPersistence:
@@ -41,6 +41,29 @@ class PredictionPersistence:
                 inputs=inputs,
                 outputs=predictions,
             )
+
+
+        self.db_session.add(prediction_data)
+        self.db_session.commit()
+        _logger.debug(f"saved data for model: {db_model}")
+
+
+    def save_feedback(
+        self,
+        *,
+        inputs: t.List,
+        model_version: str,
+        #predictions: t.List,
+        db_model: ModelType,
+    ) -> None:
+        if db_model == db_model.ModelFeedback:
+            prediction_data = LiveModelPredictions(
+                user_id=self.user_id,
+                model_version=model_version,
+                inputs=inputs,
+                #outputs=predictions,
+            )
+
 
         self.db_session.add(prediction_data)
         self.db_session.commit()

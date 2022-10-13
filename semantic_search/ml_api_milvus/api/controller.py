@@ -42,6 +42,18 @@ LATENCY_GAUGE = Gauge(
     labelnames=["app_name", "model_name", "model_version"],
 )
 
+FEEDBACK_TRACKER = Histogram(
+    name="feedback_score",
+    documentation="Similarity Feedback Score",
+    labelnames=["app_name", "model_name", "model_version"],
+)
+
+FEEDBACK_GAUGE = Gauge(
+    name="feedback_gauge",
+    documentation="Similarity Feedback Score for min max calcs",
+    labelnames=["app_name", "model_name", "model_version"],
+)
+
 MODEL_VERSIONS = Info(
     "model_version_details",
     "Capture model version information",
@@ -174,6 +186,22 @@ def feedback():
     if request.method == "POST":
         # Step 1: Extract POST data from request body as JSON
         json_data = request.get_json()
-        print("feedback POST:", json_data)
+
+        persistence = PredictionPersistence(db_session=flask.g.db_session)
+        persistence.save_feedback(
+            inputs=json_data,
+            model_version="0.1.0",
+            #predictions=json_data,
+            db_model=ModelType.ModelFeedback,
+        )
+
+        #print("feedback POST:", json_data)
         # TODO: Record this to prometheus
+
+        FEEDBACK_TRACKER.labels(
+            app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
+        ).observe(json_data["star"])
+        FEEDBACK_GAUGE.labels(
+            app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
+        ).set(json_data["star"])
         return jsonify(success=True)
