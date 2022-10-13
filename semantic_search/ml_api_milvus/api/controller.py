@@ -127,10 +127,10 @@ def make_predictions(input_data):
             hh["img_url"] = img_url
             hh["score"] = h.distance
             print("MAP:" + name)
-            # img_id = redis.get("MAP:" + str(name))
-            # print("IMG:" + img_id)
-            # hh["metadata"] = redis.json().get("IMG:" + img_id)
-            hh["metadata"] = {"item_id": "B07Y7M8LV7", "item_name": ["Glasses Old Fashioned, 6-Piece, 350ml \\u2026"], "model_name": "", "brand": ["UMI"], "bullet_point": ""}
+            img_id = redis.get("MAP:" + str(name))
+            print("IMG:" + img_id)
+            hh["metadata"] = redis.json().get("IMG:" + img_id)
+            #hh["metadata"] = {"item_id": "B07Y7M8LV7", "item_name": ["Glasses Old Fashioned, 6-Piece, 350ml \\u2026"], "model_name": "", "brand": ["UMI"], "bullet_point": ""}
             # print("image return")
             # print(hh["metadata"])
             hit_list.append(hh)
