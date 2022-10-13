@@ -80,7 +80,7 @@
                     imgIndex = index;
                   }}
                 />
-                <StarRating key={index} />
+                <StarRating key={index} searchText={searchText} imgName={image.name} score={image.score}/>
               </Column>
             {/each}
           </Row>

@@ -1,8 +1,10 @@
-<!-- Inspired from: https://svelte.dev/repl/b6a9c67f21944c1c8ad2378a07c3cd48?version=3.32.3 -->
 <!-- Made with svelte carbon components -->
 <script>
 	import Star from "carbon-icons-svelte/lib/Star.svelte";
 	export let key = 1;
+	export let searchText = "";
+	export let imgName = "";
+	export let score = 0;
 	import { Button } from "carbon-components-svelte";
 	import StarFilled from "carbon-icons-svelte/lib/StarFilled.svelte";
 	import { Modal, Form, TextArea } from "carbon-components-svelte";
@@ -81,7 +83,14 @@
 		// let them know we recieved it
 		feedbackCompleted = true;
 		if (rating !== null) {
-			sendFeedback({ star: rating, text: value, imgIndex: key });
+			sendFeedback({
+				star: rating,
+				text: value,
+				imgIndex: key,
+				searchText,
+				imgName,
+				score
+			});
 		}
 		// then reset view
 		setTimeout(() => {
@@ -107,6 +116,9 @@
 		collectFeedback = true;
 	}
 </script>
+
+<!-- Inspired from: https://svelte.dev/repl/b6a9c67f21944c1c8ad2378a07c3cd48?version=3.32.3 -->
+
 
 <div>
 	<span id={"feedbackContiner" + key}>
