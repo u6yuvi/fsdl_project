@@ -56,6 +56,10 @@ def create_app(*, config_object: Config) -> connexion.App:
 
     model = load_model()
     flask.g.model = model
+
+    #postgreSQL 
+    flask.g.db_session = db_session
+
     flask.g.redis = redis.Redis(
         host=config_object.REDIS_HOST,
         port=config_object.REDIS_PORT,

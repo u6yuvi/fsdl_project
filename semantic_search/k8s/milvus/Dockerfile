@@ -13,7 +13,7 @@ RUN apt-get update -y && \
  	# for swagger
  	apt-get install -y curl
 
-RUN pip install -r /opt/app/ml_api_milvus/requirements.txt
+RUN pip install -r /opt/app/ml_api_milvus/requirements.in
 
 ENV PYTHONPATH "${PYTHONPATH}:/opt/app/ml_api_milvus"
 WORKDIR /opt/app

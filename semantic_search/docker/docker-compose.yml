@@ -5,8 +5,15 @@ services:
       context: ../
       dockerfile: k8s/milvus/Dockerfile
     container_name: ml_api_milvus
+    environment:
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_USER: user
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_NAME: ml_api
     depends_on:
       - cadvisor
+      - database
     expose:
       - 5000
     ports:
@@ -72,7 +79,19 @@ services:
     volumes:
       - redis_data:/data
 
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ml_api
+    ports:
+      - "6609:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+
 volumes:
   prometheus_data: {}
   grafana_data: {}
   redis_data: {}
+  my_dbdata: {}

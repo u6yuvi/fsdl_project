@@ -129,6 +129,7 @@ sudo docker-compose -f docker/docker-compose.yml up -d --build
     2. Import dashboard **grafana_flask_basic_dashboard_ml_api.json**" present in our repository from  ```semantic_search/docker/config/grafana/```
 
     3. Dashboard will be loaded which is configured to monitor two metrics : **Request Latency** ,**Latency**
+       1. Built using ***flask_before_request*** and ***flask_after_request*** hooks to capture metrics with each HTTP request to the application.
     4. Try sending some requests from  http://localhost:5000/ui/ , the data points will start appearing on the dashboard
     5. ![](./images/grafana_import.png)
 
