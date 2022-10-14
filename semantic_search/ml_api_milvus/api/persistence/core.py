@@ -6,7 +6,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from api.config import Config
+from ml_api_milvus.api.config import Config
 
 _logger = logging.getLogger(__name__)
 
@@ -17,7 +17,7 @@ from sqlalchemy import Column, String, DateTime, Integer
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
 
-from api.persistence.core import Base
+from ml_api_milvus.api.persistence.core import Base
 
 
 class LiveModelPredictions(Base):

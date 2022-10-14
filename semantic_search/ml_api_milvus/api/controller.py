@@ -15,8 +15,7 @@ from ml_api_milvus.api.persistence.data_access import PredictionPersistence, Mod
 
 from prometheus_client import Gauge, Histogram, Info
 
-# sys.path.append("../semantic_search/semsearch_pkg/")
-# from semsearch.predict import make_predictions
+from ml_api_milvus.api.persistence.data_access import PredictionPersistence, ModelType
 
 PREDICTION_TRACKER = Histogram(
     name="similarity_prediction",

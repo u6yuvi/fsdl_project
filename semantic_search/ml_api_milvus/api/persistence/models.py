@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, DateTime, Integer
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
 
-from api.persistence.core import Base
+from ml_api_milvus.api.persistence.core import Base
 
 
 class LiveModelPredictions(Base):
@@ -32,3 +32,6 @@ class ModelFeedback(Base):
     model_version = Column(String(36), nullable=False)
     inputs = Column(JSONB)
     #outputs = Column(JSONB)
+# class ShadowModelPredictions(Base):
+#     raise NotImplementedError
+

@@ -15,6 +15,14 @@ DB_USER = os.getenv("DB_USER","user")
 DB_PASSWORD = os.getenv("DB_PASSWORD","password")
 DB_HOST = os.getenv("DB_HOST","database")
 DB_NAME = os.getenv("DB_NAME","ml_api")
+
+# when deploying on Google Cloud
+# TODO - Configure using environment variable
+# DB_USER = os.getenv("DB_USER","postgres")
+# DB_PASSWORD = os.getenv("DB_PASSWORD","")
+# DB_HOST = os.getenv("DB_HOST","0.0.0.0")
+# DB_NAME = os.getenv("DB_NAME","ml_api")
+
 class Config:
     DEBUG = False
     TESTING = False
@@ -31,7 +39,10 @@ class Config:
     REDIS_HOST = os.getenv("REDIS_HOST", "0.0.0.0")
     REDIS_PORT = os.getenv("REDIS_PORT", 6379)
     REDIS_PASSWORD = os.getenv("REDIS_PASSWORD", '')
-
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql+psycopg2://{DB_USER}:"
+        f"{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+    )
 
 class DevelopmentConfig(Config):
     DEBUG = True

@@ -64,3 +64,4 @@ requirements/dev-lint.txt
 bootstrap.py
 semantic_search/volumes/
 semantic_search/k8s/.kube/postgres/password.txt
+semantic_search/ml_api_milvus/api/config-local.py
