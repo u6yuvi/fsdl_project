@@ -93,6 +93,8 @@ Following services will be up and running:
 2. Using Flask OpenAPI to send search requests.
    1. The web page is available at http://localhost:5000/ui
 
+![](/home/uv/Documents/backup/Documents/github/fsdl_project/images/frontend.png)
+
 
 
 <u>**Step 3 - Interact with Monitoring Services**</u>
@@ -103,7 +105,11 @@ Following services will be up and running:
    1. The web page is available at http://localhost:3000
    2. Login Grafana with username ```admin``` and password ```foobar```.
 
+![](/home/uv/Documents/backup/Documents/github/fsdl_project/images/grafana_ml_api.png)
 
+![](/home/uv/Documents/backup/Documents/github/fsdl_project/images/grafana_milvus.png)
+
+![](/home/uv/Documents/backup/Documents/github/fsdl_project/images/grafana_infra.png)
 
 For more detailed user guide refer  ```Introduction.md```
 
