@@ -93,7 +93,7 @@ Following services will be up and running:
 2. Using Flask OpenAPI to send search requests.
    1. The web page is available at http://localhost:5000/ui
 
-![](/home/uv/Documents/backup/Documents/github/fsdl_project/images/frontend.png)
+![](./images/frontend.png)
 
 
 
