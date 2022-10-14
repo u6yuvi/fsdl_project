@@ -16,9 +16,7 @@
 
 
 
-## Quickstart
 
-[Run the project locally](Introduction.md)
 
 # Key Features
 
@@ -49,32 +47,79 @@
 
 ## Getting Started
 
-## Running on a Single Host Machine using Docker-Compose
-
 ### Install Dependencies
 
 ```
 # clone project 
-git clone https://github.com/u6yuvi/fsdl_project.git semsearch
-cd semsearch/
+git clone https://github.com/u6yuvi/fsdl_project.git fsdl_project
+cd fsdl_project/
 git checkout docker_template_exp
 
-# create conda environment
-conda create -n semsearch python=3.8
+# create conda environment [fsdl_project]
+conda env create -f environment.yml 
 conda activate semsearch
+
+#install packages
+make pip-tools
+
 ```
 
 
 
-1. Install miniconda
-2. Clone code and checkout branch
+## Run Semantic Search Engine on Single Host Machine as Container Application
+
+**<u>Step 1 - Start Search Engine Services</u>**
+
+```
+cd semantic_search/
+sudo docker-compose -f docker/docker-compose.yml up -d --build 
+```
+
+Following services will be up and running:
+
+1. Search Inference Engine [ml_api]
+2. User Interface[search_ui] 
+3. PostgreSQL[database]
+4. Redis[db]
+5. Prometheus[prometheus]
+6. Grafana[grafana]
+7. cadvisor[cadvisor]
+
+**<u>Step 2 - Interacting with Search Engine</u>** 
+
+1. Through User Interface[Semsearch UI]
+   1. The web page is available at http://localhost:5173/
+   2. For more details refer the [link](https://github.com/u6yuvi/fsdl_project/tree/redis_sql/semantic_search/search_ui) .
+2. Using Flask OpenAPI to send search requests.
+   1. The web page is available at http://localhost:5000/ui
 
 
 
-## TODO
+<u>**Step 3 - Interact with Monitoring Services**</u>
 
-1. Integrate Milvus for Preseeding the Image Corpus in the Vector Database to do approximate nearest neighbour search.
-3. Use of AWS instance to reproduce the exisiting pipeline.
-4. Explore Amazon S3 Object store to fetch Image Corpus for Preseeding in the Vector Database.
-5. Adding REST API endpoint for Image to Image Search.
-6. Monitoring Logs with Kibana.
+1. **Prometheus**
+   1. The web page is available at http://localhost:9090
+2. **Grafana**
+   1. The web page is available at http://localhost:3000
+   2. Login Grafana with username ```admin``` and password ```foobar```.
+
+
+
+For more detailed user guide refer  ```Introduction.md```
+
+
+
+#  FSDL Team
+
+1. Amit Sah
+2. Gabriela
+3. Kandpallucky
+4. Sandhya Govindaraju
+5. Utkarsh Vardhan
+
+# Maintainers
+
+- [Gabriela](https://github.com/arylwen)
+
+- [Sandhya Govindaraju](https://github.com/sandhya-sago)
+- [Utkarsh Vardhan](https://github.com/u6yuvi) 
