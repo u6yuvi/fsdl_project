@@ -1,12 +1,11 @@
 
-
 import enum
 import logging
 import typing as t
 
 from sqlalchemy.orm.session import Session
 
-from api.persistence.models import (
+from ml_api_milvus.api.persistence.models import (
     LiveModelPredictions,
 )
 
@@ -16,7 +15,6 @@ _logger = logging.getLogger(__name__)
 class ModelType(enum.Enum):
     ClipModel = "clip"
     ModelFeedback = "clip_feedback"
-
 
 class PredictionPersistence:
     def __init__(self, *, db_session: Session, user_id: str = None) -> None:
@@ -42,11 +40,9 @@ class PredictionPersistence:
                 outputs=predictions,
             )
 
-
         self.db_session.add(prediction_data)
         self.db_session.commit()
         _logger.debug(f"saved data for model: {db_model}")
-
 
     def save_feedback(
         self,
