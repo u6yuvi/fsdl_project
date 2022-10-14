@@ -6,10 +6,14 @@ APP_NAME = "ml_api"
 
 # logging format
 FORMATTER = logging.Formatter(
-    "%(asctime)s — %(name)s — %(levelname)s —" "%(funcName)s:%(lineno)d — %(message)s"  # noqa
+    "%(asctime)s — %(name)s — %(levelname)s —"
+    "%(funcName)s:%(lineno)d — %(message)s"  # noqa
 )
 
-
+DB_USER = "test_user"
+DB_PASSWORD = "password"
+DB_HOST = "localhost:6608"
+DB_NAME = "ml_api_test"
 class Config:
     DEBUG = False
     TESTING = False
@@ -17,6 +21,11 @@ class Config:
     SERVER_PORT = int(os.getenv("SERVER_PORT", 5000))
     SERVER_HOST = os.getenv("SERVER_HOST", "0.0.0.0")
     LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", logging.INFO)
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql+psycopg2://{DB_USER}:"
+        f"{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+    )
+
 
 
 class DevelopmentConfig(Config):

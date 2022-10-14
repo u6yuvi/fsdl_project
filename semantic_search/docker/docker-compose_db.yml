@@ -3,8 +3,8 @@ services:
   ml_api:
     build:
       context: ../
-      dockerfile: k8s/milvus/Dockerfile
-    container_name: ml_api_milvus
+      dockerfile: docker/Dockerfile
+    container_name: ml_api 
     environment:
       DB_HOST: database
       DB_PORT: 5432
@@ -18,16 +18,7 @@ services:
       - 5000
     ports:
       - "5000:5000"   # expose webserver to localhost host:container
-
-  search_ui:
-    container_name: search_ui
-    build:
-      context: ../
-      dockerfile: search_ui/Dockerfile
-    expose:
-      - 80
-    ports:
-      - '80:80'
+    command: bash -c "make run-service-development"
 
   prometheus:
     image: prom/prometheus
@@ -46,7 +37,6 @@ services:
 
   grafana:
     image: grafana/grafana
-    container_name: grafana
     depends_on:
       - prometheus
     ports:
@@ -59,7 +49,6 @@ services:
 
   cadvisor:
     image: google/cadvisor
-    container_name: cadvisor
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -67,17 +56,6 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
     ports:
       - 8080:8080
-
-  db:
-    image: redislabs/rejson
-    container_name: redis
-    restart: always
-    ports:
-      - 6379:6379
-    expose:
-      - 6379
-    volumes:
-      - redis_data:/data
 
   database:
     image: postgres:latest
@@ -93,5 +71,4 @@ services:
 volumes:
   prometheus_data: {}
   grafana_data: {}
-  redis_data: {}
   my_dbdata: {}

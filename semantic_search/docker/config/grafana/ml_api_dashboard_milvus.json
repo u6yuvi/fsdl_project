@@ -25,73 +25,10 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 7,
   "links": [],
   "liveNow": false,
   "panels": [
-    {
-      "columns": [],
-      "datasource": {
-        "type": "prometheus",
-        "uid": "8rQFlfMVk"
-      },
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 7,
-      "links": [],
-      "pageSize": 1,
-      "pluginVersion": "6.5.2",
-      "showHeader": true,
-      "sort": {
-        "desc": false
-      },
-      "styles": [
-        {
-          "$$hashKey": "object:929",
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "$$hashKey": "object:930",
-          "alias": "",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "8rQFlfMVk"
-          },
-          "expr": "count by(live_model, live_version, shadow_model, shadow_version, version)(model_version_details_info\n* on (instance, job) group_left(version)\npython_info)",
-          "format": "table",
-          "legendFormat": "{{model_version}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Model Versions",
-      "transform": "table",
-      "transparent": true,
-      "type": "table-old"
-    },
     {
       "aliasColors": {},
       "bars": false,
@@ -110,10 +47,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 5,
-        "w": 12,
+        "h": 7,
+        "w": 24,
         "x": 0,
-        "y": 4
+        "y": 0
       },
       "hiddenSeries": false,
       "id": 3,
@@ -147,104 +84,16 @@
             "type": "prometheus",
             "uid": "8rQFlfMVk"
           },
-          "expr": "sum (rate(similarity_prediction_sum{job=\"ml_api\"}[1m])) / sum (rate(similarity_prediction_count{job=\"ml_api\"}[1m]))",
-          "legendFormat": "Average Cosine Similarity",
+          "editorMode": "code",
+          "expr": "sum (rate(similarity_search_latency_sum{job=\"ml_api\"}[1m])) / sum (rate(similarity_search_latency_count{job=\"ml_api\"}[1m]))",
+          "legendFormat": "Average Milvus Latency",
+          "range": true,
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeRegions": [],
-      "title": "Average Cosine Similarity",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "8rQFlfMVk"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 4
-      },
-      "hiddenSeries": false,
-      "id": 9,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "9.1.8",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "8rQFlfMVk"
-          },
-          "expr": "rate(similarity_prediction_count{job=\"ml_api\"}[1m])",
-          "legendFormat": "Average Similarity Rate",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Average Cosine Similarity Rate (/second)",
+      "title": "Average Semantic Similarity Latency(sec) -Milvus",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -293,115 +142,7 @@
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 9
-      },
-      "hiddenSeries": false,
-      "id": 6,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "9.1.8",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "8rQFlfMVk"
-          },
-          "expr": "avg_over_time(similarity_gauge[1m])",
-          "legendFormat": "AVG",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "8rQFlfMVk"
-          },
-          "expr": "stddev_over_time(similarity_gauge[1m])",
-          "legendFormat": "STD",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "8rQFlfMVk"
-          },
-          "expr": "stddev_over_time(similarity_gauge[1m]) / (sqrt(count_over_time(similarity_prediction_count[1m])))",
-          "legendFormat": "SEM",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Standard Error of the Mean (SEM)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "8rQFlfMVk"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 9
+        "y": 7
       },
       "hiddenSeries": false,
       "id": 10,
@@ -435,8 +176,10 @@
             "type": "prometheus",
             "uid": "8rQFlfMVk"
           },
-          "expr": "(avg_over_time(similarity_gauge[1m])  - avg_over_time(similarity_gauge[1w])) /  (stddev_over_time(similarity_gauge[1w]))",
+          "editorMode": "code",
+          "expr": "(avg_over_time(similarity_search_latency_gauge[1m])  - avg_over_time(similarity_search_latency_gauge[1w])) /  (stddev_over_time(similarity_search_latency_gauge[1w]))",
           "legendFormat": "Z-Score",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -471,6 +214,120 @@
       }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "8rQFlfMVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.1.8",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "8rQFlfMVk"
+          },
+          "editorMode": "code",
+          "expr": "avg_over_time(similarity_search_latency_gauge[1m])",
+          "legendFormat": "AVG",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "8rQFlfMVk"
+          },
+          "editorMode": "code",
+          "expr": "stddev_over_time(similarity_search_latency_gauge[1m])",
+          "legendFormat": "STD",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "8rQFlfMVk"
+          },
+          "editorMode": "code",
+          "expr": "stddev_over_time(similarity_search_latency_gauge[1m]) / (sqrt(count_over_time(similarity_search_latency_count[1m])))",
+          "legendFormat": "SEM",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Standard Error of the Mean (SEM)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "8rQFlfMVk"
@@ -488,15 +345,11 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red"
+                "color": "green"
               },
               {
-                "color": "#EAB839",
-                "value": 0.2
-              },
-              {
-                "color": "dark-green",
-                "value": 0.8
+                "color": "red",
+                "value": 0.5
               }
             ]
           },
@@ -505,10 +358,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 12
       },
       "id": 5,
       "options": {
@@ -530,12 +383,14 @@
             "type": "prometheus",
             "uid": "8rQFlfMVk"
           },
-          "expr": "similarity_gauge",
+          "editorMode": "code",
+          "expr": "similarity_search_latency_gauge",
           "legendFormat": "Average Cosine Similarity",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Min Prediction",
+      "title": "Min Semantic Search Latency(sec)-Milvus",
       "type": "gauge"
     },
     {
@@ -556,15 +411,11 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red"
+                "color": "green"
               },
               {
-                "color": "dark-yellow",
-                "value": 0.2
-              },
-              {
-                "color": "dark-green",
-                "value": 0.8
+                "color": "red",
+                "value": 0.5
               }
             ]
           },
@@ -573,12 +424,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 12
       },
-      "id": 8,
+      "id": 11,
       "options": {
         "orientation": "auto",
         "reduceOptions": {
@@ -598,12 +449,14 @@
             "type": "prometheus",
             "uid": "8rQFlfMVk"
           },
-          "expr": "similarity_gauge",
+          "editorMode": "code",
+          "expr": "similarity_search_latency_gauge",
           "legendFormat": "Average Cosine Similarity",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Max Prediction",
+      "title": "Max Semantic Search Latency(sec)-Milvus",
       "type": "gauge"
     }
   ],
@@ -632,8 +485,8 @@
     ]
   },
   "timezone": "",
-  "title": "ML API Dashboard",
-  "uid": "q8vgEpLZi",
-  "version": 4,
+  "title": "ML API Dashboard-Milvus",
+  "uid": "q8vgEpLZk1",
+  "version": 2,
   "weekStart": ""
 }

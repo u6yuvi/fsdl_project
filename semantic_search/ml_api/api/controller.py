@@ -1,9 +1,11 @@
 import numpy as np
-from flask import jsonify, request
+from flask import jsonify, request, current_app
 from ml_api.api.config import APP_NAME
 from prometheus_client import Gauge, Histogram, Info
+
 # sys.path.append("../semantic_search/semsearch_pkg/")
 from semsearch.predict import make_predictions
+from ml_api.api.persistence.data_access import PredictionPersistence, ModelType
 
 PREDICTION_TRACKER = Histogram(
     name="similarity_prediction",
@@ -68,6 +70,21 @@ def predict():
             app_name=APP_NAME, model_name="Clip", model_version="0.1.0"
         ).set(mean_score)
 
+        persistence = PredictionPersistence(db_session=current_app.db_session)
+        persistence.save_predictions(
+            inputs=json_data,
+            model_version="0.1.0",
+            predictions=result,
+            db_model=ModelType.ClipModel,
+        )
         # Step 5: Prepare prediction response
         return jsonify(
-            {"predictions": result, "version": "0.1.0", "errors": []})
+            {"predictions": result, "version": "0.1.0", "errors": []}
+        )
+
+
+def feedback():
+    if request.method == "POST":
+        # Step 1: Extract POST data from request body as JSON
+        json_data = request.get_json()
+        print("feedback POST:", json_data)
