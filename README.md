@@ -109,6 +109,8 @@ Following services will be up and running:
 
 ![](./images/grafana_milvus.png)
 
+![](./images/grafana_flask_dashboard.png)
+
 ![](./images/grafana_infra.png)
 
 For more detailed user guide refer  ```Introduction.md```
